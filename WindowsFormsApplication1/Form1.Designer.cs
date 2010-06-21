@@ -127,6 +127,7 @@
             this.webBrowser1.Size = new System.Drawing.Size(784, 421);
             this.webBrowser1.TabIndex = 3;
             this.webBrowser1.Url = new System.Uri("http://dict.cn/bdc/", System.UriKind.Absolute);
+            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
             // 
             // statusStrip1
             // 
@@ -166,6 +167,7 @@
             // 
             this.toolStripTextBox1.Name = "toolStripTextBox1";
             this.toolStripTextBox1.Size = new System.Drawing.Size(100, 25);
+            this.toolStripTextBox1.Text = "http://dict.cn/bdc/";
             // 
             // Form1
             // 
