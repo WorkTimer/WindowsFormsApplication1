@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DictCnModelStoreContainer" CdmEntityContainer="DictCnEntities">
+    <EntitySetMapping Name="分类集">
+      <EntityTypeMapping TypeName="IsTypeOf(DictCnModel.分类)">
+        <MappingFragment StoreEntitySet="分类集">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="名称" ColumnName="名称" />
+          <ScalarProperty Name="地址" ColumnName="地址" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
