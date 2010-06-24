@@ -2,6 +2,16 @@
 <Schema Namespace="DictCnModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
   <EntityContainer Name="DictCnEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="分类集" EntityType="DictCnModel.分类" />
+    <EntitySet Name="单词集" EntityType="DictCnModel.单词" />
+    <EntitySet Name="课本集" EntityType="DictCnModel.课本" />
+    <AssociationSet Name="分类课本" Association="DictCnModel.分类课本">
+      <End Role="分类" EntitySet="分类集" />
+      <End Role="课本" EntitySet="课本集" />
+    </AssociationSet>
+    <AssociationSet Name="课本单词" Association="DictCnModel.课本单词">
+      <End Role="课本" EntitySet="课本集" />
+      <End Role="单词" EntitySet="单词集" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="分类">
     <Key>
@@ -10,5 +20,46 @@
     <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Type="String" Name="名称" Nullable="false" />
     <Property Type="String" Name="地址" Nullable="false" />
+    <NavigationProperty Name="课本" Relationship="DictCnModel.分类课本" FromRole="分类" ToRole="课本" />
+    <Property Type="DateTime" Name="更新日期" Nullable="false" />
   </EntityType>
+  <EntityType Name="单词">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="拼写" Nullable="false" />
+    <Property Type="String" Name="音标" Nullable="false" />
+    <Property Type="DateTime" Name="更新日期" Nullable="false" />
+    <NavigationProperty Name="课本" Relationship="DictCnModel.课本单词" FromRole="单词" ToRole="课本" />
+    <Property Type="String" Name="解释" Nullable="false" />
+    <Property Type="String" Name="读音" Nullable="false" />
+    <Property Type="String" Name="本组词数" Nullable="false" />
+    <Property Type="String" Name="组地址" Nullable="false" />
+    <Property Type="String" Name="页地址" Nullable="false" />
+    <Property Type="String" Name="所在组" Nullable="false" />
+    <Property Type="String" Name="所在页" Nullable="false" />
+  </EntityType>
+  <EntityType Name="课本">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="分类" Relationship="DictCnModel.分类课本" FromRole="课本" ToRole="分类" />
+    <NavigationProperty Name="单词" Relationship="DictCnModel.课本单词" FromRole="课本" ToRole="单词" />
+    <Property Type="DateTime" Name="更新日期" Nullable="false" />
+    <Property Type="String" Name="名称" Nullable="false" />
+    <Property Type="String" Name="地址" Nullable="false" />
+    <Property Type="Int32" Name="单词数量" Nullable="false" />
+    <Property Type="Byte" Name="分组方式" Nullable="false" />
+    <Property Type="Int32" Name="分组总数" Nullable="false" />
+  </EntityType>
+  <Association Name="分类课本">
+    <End Type="DictCnModel.分类" Role="分类" Multiplicity="1" />
+    <End Type="DictCnModel.课本" Role="课本" Multiplicity="*" />
+  </Association>
+  <Association Name="课本单词">
+    <End Type="DictCnModel.课本" Role="课本" Multiplicity="1" />
+    <End Type="DictCnModel.单词" Role="单词" Multiplicity="*" />
+  </Association>
 </Schema>

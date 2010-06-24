@@ -2,6 +2,16 @@
 <Schema Namespace="DictCnModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="DictCnModelStoreContainer">
     <EntitySet Name="分类集" EntityType="DictCnModel.Store.分类集" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="单词集" EntityType="DictCnModel.Store.单词集" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="课本集" EntityType="DictCnModel.Store.课本集" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="分类课本" Association="DictCnModel.Store.分类课本">
+      <End Role="分类" EntitySet="分类集" />
+      <End Role="课本" EntitySet="课本集" />
+    </AssociationSet>
+    <AssociationSet Name="课本单词" Association="DictCnModel.Store.课本单词">
+      <End Role="课本" EntitySet="课本集" />
+      <End Role="单词" EntitySet="单词集" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="分类集">
     <Key>
@@ -10,5 +20,60 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="名称" Type="nvarchar(max)" Nullable="false" />
     <Property Name="地址" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="更新日期" Type="datetime" Nullable="false" />
   </EntityType>
+  <EntityType Name="单词集">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="拼写" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="音标" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="更新日期" Type="datetime" Nullable="false" />
+    <Property Name="解释" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="读音" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="本组词数" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="组地址" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="页地址" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="所在组" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="所在页" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="课本_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="课本集">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="更新日期" Type="datetime" Nullable="false" />
+    <Property Name="名称" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="地址" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="单词数量" Type="int" Nullable="false" />
+    <Property Name="分组方式" Type="tinyint" Nullable="false" />
+    <Property Name="分组总数" Type="int" Nullable="false" />
+    <Property Name="分类_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="分类课本">
+    <End Role="分类" Type="DictCnModel.Store.分类集" Multiplicity="1" />
+    <End Role="课本" Type="DictCnModel.Store.课本集" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="分类">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="课本">
+        <PropertyRef Name="分类_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="课本单词">
+    <End Role="课本" Type="DictCnModel.Store.课本集" Multiplicity="1" />
+    <End Role="单词" Type="DictCnModel.Store.单词集" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="课本">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="单词">
+        <PropertyRef Name="课本_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

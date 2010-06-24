@@ -7,6 +7,16 @@
     <Schema Namespace="DictCnModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
   <EntityContainer Name="DictCnModelStoreContainer">
     <EntitySet Name="分类集" EntityType="DictCnModel.Store.分类集" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="单词集" EntityType="DictCnModel.Store.单词集" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="课本集" EntityType="DictCnModel.Store.课本集" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="分类课本" Association="DictCnModel.Store.分类课本">
+      <End Role="分类" EntitySet="分类集" />
+      <End Role="课本" EntitySet="课本集" />
+    </AssociationSet>
+    <AssociationSet Name="课本单词" Association="DictCnModel.Store.课本单词">
+      <End Role="课本" EntitySet="课本集" />
+      <End Role="单词" EntitySet="单词集" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="分类集">
     <Key>
@@ -15,13 +25,78 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="名称" Type="nvarchar(max)" Nullable="false" />
     <Property Name="地址" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="更新日期" Type="datetime" Nullable="false" />
   </EntityType>
+  <EntityType Name="单词集">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="拼写" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="音标" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="更新日期" Type="datetime" Nullable="false" />
+    <Property Name="解释" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="读音" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="本组词数" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="组地址" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="页地址" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="所在组" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="所在页" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="课本_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="课本集">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="更新日期" Type="datetime" Nullable="false" />
+    <Property Name="名称" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="地址" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="单词数量" Type="int" Nullable="false" />
+    <Property Name="分组方式" Type="tinyint" Nullable="false" />
+    <Property Name="分组总数" Type="int" Nullable="false" />
+    <Property Name="分类_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="分类课本">
+    <End Role="分类" Type="DictCnModel.Store.分类集" Multiplicity="1" />
+    <End Role="课本" Type="DictCnModel.Store.课本集" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="分类">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="课本">
+        <PropertyRef Name="分类_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="课本单词">
+    <End Role="课本" Type="DictCnModel.Store.课本集" Multiplicity="1" />
+    <End Role="单词" Type="DictCnModel.Store.单词集" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="课本">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="单词">
+        <PropertyRef Name="课本_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DictCnModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="DictCnEntities" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="分类集" EntityType="DictCnModel.分类" />
+          <EntitySet Name="单词集" EntityType="DictCnModel.单词" />
+          <EntitySet Name="课本集" EntityType="DictCnModel.课本" />
+          <AssociationSet Name="分类课本" Association="DictCnModel.分类课本">
+            <End Role="分类" EntitySet="分类集" />
+            <End Role="课本" EntitySet="课本集" />
+          </AssociationSet>
+          <AssociationSet Name="课本单词" Association="DictCnModel.课本单词">
+            <End Role="课本" EntitySet="课本集" />
+            <End Role="单词" EntitySet="单词集" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="分类">
           <Key>
@@ -30,7 +105,48 @@
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="名称" Nullable="false" />
           <Property Type="String" Name="地址" Nullable="false" />
+          <NavigationProperty Name="课本" Relationship="DictCnModel.分类课本" FromRole="分类" ToRole="课本" />
+          <Property Type="DateTime" Name="更新日期" Nullable="false" />
         </EntityType>
+        <EntityType Name="单词">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="拼写" Nullable="false" />
+          <Property Type="String" Name="音标" Nullable="false" />
+          <Property Type="DateTime" Name="更新日期" Nullable="false" />
+          <NavigationProperty Name="课本" Relationship="DictCnModel.课本单词" FromRole="单词" ToRole="课本" />
+          <Property Type="String" Name="解释" Nullable="false" />
+          <Property Type="String" Name="读音" Nullable="false" />
+          <Property Type="String" Name="本组词数" Nullable="false" />
+          <Property Type="String" Name="组地址" Nullable="false" />
+          <Property Type="String" Name="页地址" Nullable="false" />
+          <Property Type="String" Name="所在组" Nullable="false" />
+          <Property Type="String" Name="所在页" Nullable="false" />
+        </EntityType>
+        <EntityType Name="课本">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="分类" Relationship="DictCnModel.分类课本" FromRole="课本" ToRole="分类" />
+          <NavigationProperty Name="单词" Relationship="DictCnModel.课本单词" FromRole="课本" ToRole="单词" />
+          <Property Type="DateTime" Name="更新日期" Nullable="false" />
+          <Property Type="String" Name="名称" Nullable="false" />
+          <Property Type="String" Name="地址" Nullable="false" />
+          <Property Type="Int32" Name="单词数量" Nullable="false" />
+          <Property Type="Byte" Name="分组方式" Nullable="false" />
+          <Property Type="Int32" Name="分组总数" Nullable="false" />
+        </EntityType>
+        <Association Name="分类课本">
+          <End Type="DictCnModel.分类" Role="分类" Multiplicity="1" />
+          <End Type="DictCnModel.课本" Role="课本" Multiplicity="*" />
+        </Association>
+        <Association Name="课本单词">
+          <End Type="DictCnModel.课本" Role="课本" Multiplicity="1" />
+          <End Type="DictCnModel.单词" Role="单词" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -43,9 +159,56 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="名称" ColumnName="名称" />
           <ScalarProperty Name="地址" ColumnName="地址" />
+          <ScalarProperty Name="更新日期" ColumnName="更新日期" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="单词集">
+      <EntityTypeMapping TypeName="IsTypeOf(DictCnModel.单词)">
+        <MappingFragment StoreEntitySet="单词集">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="拼写" ColumnName="拼写" />
+          <ScalarProperty Name="音标" ColumnName="音标" />
+          <ScalarProperty Name="更新日期" ColumnName="更新日期" />
+          <ScalarProperty Name="解释" ColumnName="解释" />
+          <ScalarProperty Name="读音" ColumnName="读音" />
+          <ScalarProperty Name="本组词数" ColumnName="本组词数" />
+          <ScalarProperty Name="组地址" ColumnName="组地址" />
+          <ScalarProperty Name="页地址" ColumnName="页地址" />
+          <ScalarProperty Name="所在组" ColumnName="所在组" />
+          <ScalarProperty Name="所在页" ColumnName="所在页" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="课本集">
+      <EntityTypeMapping TypeName="IsTypeOf(DictCnModel.课本)">
+        <MappingFragment StoreEntitySet="课本集">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="更新日期" ColumnName="更新日期" />
+          <ScalarProperty Name="名称" ColumnName="名称" />
+          <ScalarProperty Name="地址" ColumnName="地址" />
+          <ScalarProperty Name="单词数量" ColumnName="单词数量" />
+          <ScalarProperty Name="分组方式" ColumnName="分组方式" />
+          <ScalarProperty Name="分组总数" ColumnName="分组总数" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="分类课本" TypeName="DictCnModel.分类课本" StoreEntitySet="课本集">
+      <EndProperty Name="分类">
+        <ScalarProperty Name="ID" ColumnName="分类_ID" />
+      </EndProperty>
+      <EndProperty Name="课本">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="课本单词" TypeName="DictCnModel.课本单词" StoreEntitySet="单词集">
+      <EndProperty Name="课本">
+        <ScalarProperty Name="ID" ColumnName="课本_ID" />
+      </EndProperty>
+      <EndProperty Name="单词">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
@@ -66,7 +229,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Model1" >
-        <EntityTypeShape EntityType="DictCnModel.分类" Width="1.5" PointX="4.875" PointY="0.875" Height="1.5879931640625" />
+        <EntityTypeShape EntityType="DictCnModel.分类" Width="1.5" PointX="8" PointY="0.875" Height="1.9700325520833339" />
+        <EntityTypeShape EntityType="DictCnModel.单词" Width="1.5" PointX="3.375" PointY="0.75" Height="3.3071704101562496" />
+        <EntityTypeShape EntityType="DictCnModel.课本" Width="1.5" PointX="5.75" PointY="0.75" Height="2.734111328125" />
+        <AssociationConnector Association="DictCnModel.分类课本">
+          <ConnectorPoint PointX="8" PointY="1.860016276041667" />
+          <ConnectorPoint PointX="7.25" PointY="1.860016276041667" />
+        </AssociationConnector>
+        <AssociationConnector Association="DictCnModel.课本单词">
+          <ConnectorPoint PointX="5.75" PointY="2.1170556640625" />
+          <ConnectorPoint PointX="4.875" PointY="2.1170556640625" />
+        </AssociationConnector>
       </Diagram>
     </Diagrams>
   </Designer>

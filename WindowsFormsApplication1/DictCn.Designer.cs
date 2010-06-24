@@ -16,6 +16,12 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 
 [assembly: EdmSchemaAttribute()]
+#region EDM 关系源元数据
+
+[assembly: EdmRelationshipAttribute("DictCnModel", "分类课本", "分类", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WindowsFormsApplication1.分类), "课本", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WindowsFormsApplication1.课本))]
+[assembly: EdmRelationshipAttribute("DictCnModel", "课本单词", "课本", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WindowsFormsApplication1.课本), "单词", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WindowsFormsApplication1.单词))]
+
+#endregion
 
 namespace WindowsFormsApplication1
 {
@@ -80,6 +86,38 @@ namespace WindowsFormsApplication1
             }
         }
         private ObjectSet<分类> _分类集;
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        public ObjectSet<单词> 单词集
+        {
+            get
+            {
+                if ((_单词集 == null))
+                {
+                    _单词集 = base.CreateObjectSet<单词>("单词集");
+                }
+                return _单词集;
+            }
+        }
+        private ObjectSet<单词> _单词集;
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        public ObjectSet<课本> 课本集
+        {
+            get
+            {
+                if ((_课本集 == null))
+                {
+                    _课本集 = base.CreateObjectSet<课本>("课本集");
+                }
+                return _课本集;
+            }
+        }
+        private ObjectSet<课本> _课本集;
 
         #endregion
         #region AddTo 方法
@@ -90,6 +128,22 @@ namespace WindowsFormsApplication1
         public void AddTo分类集(分类 分类)
         {
             base.AddObject("分类集", 分类);
+        }
+    
+        /// <summary>
+        /// 用于向 单词集 EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
+        /// </summary>
+        public void AddTo单词集(单词 单词)
+        {
+            base.AddObject("单词集", 单词);
+        }
+    
+        /// <summary>
+        /// 用于向 课本集 EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
+        /// </summary>
+        public void AddTo课本集(课本 课本)
+        {
+            base.AddObject("课本集", 课本);
         }
 
         #endregion
@@ -116,12 +170,14 @@ namespace WindowsFormsApplication1
         /// <param name="id">ID 属性的初始值。</param>
         /// <param name="名称">名称 属性的初始值。</param>
         /// <param name="地址">地址 属性的初始值。</param>
-        public static 分类 Create分类(global::System.Int32 id, global::System.String 名称, global::System.String 地址)
+        /// <param name="更新日期">更新日期 属性的初始值。</param>
+        public static 分类 Create分类(global::System.Int32 id, global::System.String 名称, global::System.String 地址, global::System.DateTime 更新日期)
         {
             分类 分类 = new 分类();
             分类.ID = id;
             分类.名称 = 名称;
             分类.地址 = 地址;
+            分类.更新日期 = 更新日期;
             return 分类;
         }
 
@@ -202,9 +258,688 @@ namespace WindowsFormsApplication1
         private global::System.String _地址;
         partial void On地址Changing(global::System.String value);
         partial void On地址Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime 更新日期
+        {
+            get
+            {
+                return _更新日期;
+            }
+            set
+            {
+                On更新日期Changing(value);
+                ReportPropertyChanging("更新日期");
+                _更新日期 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("更新日期");
+                On更新日期Changed();
+            }
+        }
+        private global::System.DateTime _更新日期;
+        partial void On更新日期Changing(global::System.DateTime value);
+        partial void On更新日期Changed();
 
         #endregion
     
+        #region 导航属性
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DictCnModel", "分类课本", "课本")]
+        public EntityCollection<课本> 课本
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<课本>("DictCnModel.分类课本", "课本");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<课本>("DictCnModel.分类课本", "课本", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// 没有元数据文档可用。
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DictCnModel", Name="单词")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class 单词 : EntityObject
+    {
+        #region 工厂方法
+    
+        /// <summary>
+        /// 创建新的 单词 对象。
+        /// </summary>
+        /// <param name="id">ID 属性的初始值。</param>
+        /// <param name="拼写">拼写 属性的初始值。</param>
+        /// <param name="音标">音标 属性的初始值。</param>
+        /// <param name="更新日期">更新日期 属性的初始值。</param>
+        /// <param name="解释">解释 属性的初始值。</param>
+        /// <param name="读音">读音 属性的初始值。</param>
+        /// <param name="本组词数">本组词数 属性的初始值。</param>
+        /// <param name="组地址">组地址 属性的初始值。</param>
+        /// <param name="页地址">页地址 属性的初始值。</param>
+        /// <param name="所在组">所在组 属性的初始值。</param>
+        /// <param name="所在页">所在页 属性的初始值。</param>
+        public static 单词 Create单词(global::System.Int32 id, global::System.String 拼写, global::System.String 音标, global::System.DateTime 更新日期, global::System.String 解释, global::System.String 读音, global::System.String 本组词数, global::System.String 组地址, global::System.String 页地址, global::System.String 所在组, global::System.String 所在页)
+        {
+            单词 单词 = new 单词();
+            单词.ID = id;
+            单词.拼写 = 拼写;
+            单词.音标 = 音标;
+            单词.更新日期 = 更新日期;
+            单词.解释 = 解释;
+            单词.读音 = 读音;
+            单词.本组词数 = 本组词数;
+            单词.组地址 = 组地址;
+            单词.页地址 = 页地址;
+            单词.所在组 = 所在组;
+            单词.所在页 = 所在页;
+            return 单词;
+        }
+
+        #endregion
+        #region 基元属性
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String 拼写
+        {
+            get
+            {
+                return _拼写;
+            }
+            set
+            {
+                On拼写Changing(value);
+                ReportPropertyChanging("拼写");
+                _拼写 = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("拼写");
+                On拼写Changed();
+            }
+        }
+        private global::System.String _拼写;
+        partial void On拼写Changing(global::System.String value);
+        partial void On拼写Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String 音标
+        {
+            get
+            {
+                return _音标;
+            }
+            set
+            {
+                On音标Changing(value);
+                ReportPropertyChanging("音标");
+                _音标 = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("音标");
+                On音标Changed();
+            }
+        }
+        private global::System.String _音标;
+        partial void On音标Changing(global::System.String value);
+        partial void On音标Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime 更新日期
+        {
+            get
+            {
+                return _更新日期;
+            }
+            set
+            {
+                On更新日期Changing(value);
+                ReportPropertyChanging("更新日期");
+                _更新日期 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("更新日期");
+                On更新日期Changed();
+            }
+        }
+        private global::System.DateTime _更新日期;
+        partial void On更新日期Changing(global::System.DateTime value);
+        partial void On更新日期Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String 解释
+        {
+            get
+            {
+                return _解释;
+            }
+            set
+            {
+                On解释Changing(value);
+                ReportPropertyChanging("解释");
+                _解释 = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("解释");
+                On解释Changed();
+            }
+        }
+        private global::System.String _解释;
+        partial void On解释Changing(global::System.String value);
+        partial void On解释Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String 读音
+        {
+            get
+            {
+                return _读音;
+            }
+            set
+            {
+                On读音Changing(value);
+                ReportPropertyChanging("读音");
+                _读音 = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("读音");
+                On读音Changed();
+            }
+        }
+        private global::System.String _读音;
+        partial void On读音Changing(global::System.String value);
+        partial void On读音Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String 本组词数
+        {
+            get
+            {
+                return _本组词数;
+            }
+            set
+            {
+                On本组词数Changing(value);
+                ReportPropertyChanging("本组词数");
+                _本组词数 = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("本组词数");
+                On本组词数Changed();
+            }
+        }
+        private global::System.String _本组词数;
+        partial void On本组词数Changing(global::System.String value);
+        partial void On本组词数Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String 组地址
+        {
+            get
+            {
+                return _组地址;
+            }
+            set
+            {
+                On组地址Changing(value);
+                ReportPropertyChanging("组地址");
+                _组地址 = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("组地址");
+                On组地址Changed();
+            }
+        }
+        private global::System.String _组地址;
+        partial void On组地址Changing(global::System.String value);
+        partial void On组地址Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String 页地址
+        {
+            get
+            {
+                return _页地址;
+            }
+            set
+            {
+                On页地址Changing(value);
+                ReportPropertyChanging("页地址");
+                _页地址 = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("页地址");
+                On页地址Changed();
+            }
+        }
+        private global::System.String _页地址;
+        partial void On页地址Changing(global::System.String value);
+        partial void On页地址Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String 所在组
+        {
+            get
+            {
+                return _所在组;
+            }
+            set
+            {
+                On所在组Changing(value);
+                ReportPropertyChanging("所在组");
+                _所在组 = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("所在组");
+                On所在组Changed();
+            }
+        }
+        private global::System.String _所在组;
+        partial void On所在组Changing(global::System.String value);
+        partial void On所在组Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String 所在页
+        {
+            get
+            {
+                return _所在页;
+            }
+            set
+            {
+                On所在页Changing(value);
+                ReportPropertyChanging("所在页");
+                _所在页 = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("所在页");
+                On所在页Changed();
+            }
+        }
+        private global::System.String _所在页;
+        partial void On所在页Changing(global::System.String value);
+        partial void On所在页Changed();
+
+        #endregion
+    
+        #region 导航属性
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DictCnModel", "课本单词", "课本")]
+        public 课本 课本
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<课本>("DictCnModel.课本单词", "课本").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<课本>("DictCnModel.课本单词", "课本").Value = value;
+            }
+        }
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<课本> 课本Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<课本>("DictCnModel.课本单词", "课本");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<课本>("DictCnModel.课本单词", "课本", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// 没有元数据文档可用。
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="DictCnModel", Name="课本")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class 课本 : EntityObject
+    {
+        #region 工厂方法
+    
+        /// <summary>
+        /// 创建新的 课本 对象。
+        /// </summary>
+        /// <param name="id">ID 属性的初始值。</param>
+        /// <param name="更新日期">更新日期 属性的初始值。</param>
+        /// <param name="名称">名称 属性的初始值。</param>
+        /// <param name="地址">地址 属性的初始值。</param>
+        /// <param name="单词数量">单词数量 属性的初始值。</param>
+        /// <param name="分组方式">分组方式 属性的初始值。</param>
+        /// <param name="分组总数">分组总数 属性的初始值。</param>
+        public static 课本 Create课本(global::System.Int32 id, global::System.DateTime 更新日期, global::System.String 名称, global::System.String 地址, global::System.Int32 单词数量, global::System.Byte 分组方式, global::System.Int32 分组总数)
+        {
+            课本 课本 = new 课本();
+            课本.ID = id;
+            课本.更新日期 = 更新日期;
+            课本.名称 = 名称;
+            课本.地址 = 地址;
+            课本.单词数量 = 单词数量;
+            课本.分组方式 = 分组方式;
+            课本.分组总数 = 分组总数;
+            return 课本;
+        }
+
+        #endregion
+        #region 基元属性
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime 更新日期
+        {
+            get
+            {
+                return _更新日期;
+            }
+            set
+            {
+                On更新日期Changing(value);
+                ReportPropertyChanging("更新日期");
+                _更新日期 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("更新日期");
+                On更新日期Changed();
+            }
+        }
+        private global::System.DateTime _更新日期;
+        partial void On更新日期Changing(global::System.DateTime value);
+        partial void On更新日期Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String 名称
+        {
+            get
+            {
+                return _名称;
+            }
+            set
+            {
+                On名称Changing(value);
+                ReportPropertyChanging("名称");
+                _名称 = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("名称");
+                On名称Changed();
+            }
+        }
+        private global::System.String _名称;
+        partial void On名称Changing(global::System.String value);
+        partial void On名称Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String 地址
+        {
+            get
+            {
+                return _地址;
+            }
+            set
+            {
+                On地址Changing(value);
+                ReportPropertyChanging("地址");
+                _地址 = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("地址");
+                On地址Changed();
+            }
+        }
+        private global::System.String _地址;
+        partial void On地址Changing(global::System.String value);
+        partial void On地址Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 单词数量
+        {
+            get
+            {
+                return _单词数量;
+            }
+            set
+            {
+                On单词数量Changing(value);
+                ReportPropertyChanging("单词数量");
+                _单词数量 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("单词数量");
+                On单词数量Changed();
+            }
+        }
+        private global::System.Int32 _单词数量;
+        partial void On单词数量Changing(global::System.Int32 value);
+        partial void On单词数量Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Byte 分组方式
+        {
+            get
+            {
+                return _分组方式;
+            }
+            set
+            {
+                On分组方式Changing(value);
+                ReportPropertyChanging("分组方式");
+                _分组方式 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("分组方式");
+                On分组方式Changed();
+            }
+        }
+        private global::System.Byte _分组方式;
+        partial void On分组方式Changing(global::System.Byte value);
+        partial void On分组方式Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 分组总数
+        {
+            get
+            {
+                return _分组总数;
+            }
+            set
+            {
+                On分组总数Changing(value);
+                ReportPropertyChanging("分组总数");
+                _分组总数 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("分组总数");
+                On分组总数Changed();
+            }
+        }
+        private global::System.Int32 _分组总数;
+        partial void On分组总数Changing(global::System.Int32 value);
+        partial void On分组总数Changed();
+
+        #endregion
+    
+        #region 导航属性
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DictCnModel", "分类课本", "分类")]
+        public 分类 分类
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<分类>("DictCnModel.分类课本", "分类").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<分类>("DictCnModel.分类课本", "分类").Value = value;
+            }
+        }
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<分类> 分类Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<分类>("DictCnModel.分类课本", "分类");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<分类>("DictCnModel.分类课本", "分类", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DictCnModel", "课本单词", "单词")]
+        public EntityCollection<单词> 单词
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<单词>("DictCnModel.课本单词", "单词");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<单词>("DictCnModel.课本单词", "单词", value);
+                }
+            }
+        }
+
+        #endregion
     }
 
     #endregion
