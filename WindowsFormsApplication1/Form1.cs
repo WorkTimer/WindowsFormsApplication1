@@ -16,7 +16,7 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
         }
-
+        private DictCnEntities context = null;
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             if (e.Url != this.webBrowser1.Url) return;
@@ -28,40 +28,36 @@ namespace WindowsFormsApplication1
             //var numQuery = from htmlNode in htmlNodes
             //               where htmlNode.InnerText != null
             //               select htmlNode;
-           // new DictCnEntities
+            // new DictCnEntities
             //foreach (HtmlNode htmlNode in htmlNodes)
             //{
             //    //htmlNode.InnerText
             //    int i = 0;
             //}
             //this.dictCnEntitiesBindingSource
-            using (DictCnEntities context  = new DictCnEntities())
-            {
-                try
-                {
-                    int i = 0;
-                    foreach (HtmlNode htmlNode in htmlNodes)
-                    {
-                        分类 my = new 分类
-                        {
-                            名称 = htmlNode.InnerText,
-                            地址 = htmlNode.Attributes["href"].Value
-                        };
-                        //分类 my = 分类.Create分类(i++, htmlNode.InnerText, htmlNode.Attributes["href"].Value);
-                        context.分类集.AddObject(my);
-                    }
-                    i = context.SaveChanges();
-                    this.dataGridView1.DataSource = context.分类集;
-                }
-                catch (UpdateException ex)
-                {
-                    //Console.WriteLine(ex.ToString());
-                }
-            }
-        }
+            if (context == null) context = new DictCnEntities();
 
-        private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
+            try
+            {
+                int i = 0;
+                foreach (HtmlNode htmlNode in htmlNodes)
+                {
+                    分类 my = new 分类
+                    {
+                        名称 = htmlNode.InnerText,
+                        地址 = htmlNode.Attributes["href"].Value,
+                        更新日期 = DateTime.Now,
+                    };
+                    //分类 my = 分类.Create分类(i++, htmlNode.InnerText, htmlNode.Attributes["href"].Value);
+                    context.分类集.AddObject(my);
+                }
+                i = context.SaveChanges();
+                this.dataGridView1.DataSource = context.分类集;
+            }
+            catch (UpdateException ex)
+            {
+                this.toolStripStatusLabel1.Text = ex.Message;
+            }
 
         }
 
@@ -76,6 +72,22 @@ namespace WindowsFormsApplication1
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
             this.toolStripTextBox1.Size = new Size(this.toolStrip2.DisplayRectangle.Width - 2, this.toolStripTextBox1.Height);
+        }
+
+        private void dataGridView1_DataSourceChanged(object sender, EventArgs e)
+        {
+            //this.dataGridView1.DataSourceChanged += new System.EventHandler(this.dataGridView1_DataSourceChanged);
+            this.webBrowser1.DocumentCompleted -= new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
+            foreach (分类 my分类 in context.分类集)
+            {
+                
+            }
+            //this.webBrowser1.Navigate("");
+        }
+
+        private void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+        {
+            this.toolStripTextBox1.Text = e.Url.AbsoluteUri;
         }
     }
 }

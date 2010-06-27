@@ -5,12 +5,12 @@
     <EntitySet Name="单词集" EntityType="DictCnModel.单词" />
     <EntitySet Name="课本集" EntityType="DictCnModel.课本" />
     <AssociationSet Name="分类课本" Association="DictCnModel.分类课本">
-      <End Role="分类" EntitySet="分类集" />
-      <End Role="课本" EntitySet="课本集" />
+      <End EntitySet="分类集" Role="分类" />
+      <End EntitySet="课本集" Role="课本" />
     </AssociationSet>
     <AssociationSet Name="课本单词" Association="DictCnModel.课本单词">
-      <End Role="课本" EntitySet="课本集" />
-      <End Role="单词" EntitySet="单词集" />
+      <End EntitySet="课本集" Role="课本" />
+      <End EntitySet="单词集" Role="单词" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="分类">
@@ -55,11 +55,11 @@
     <Property Type="Int32" Name="分组总数" Nullable="false" />
   </EntityType>
   <Association Name="分类课本">
-    <End Type="DictCnModel.分类" Role="分类" Multiplicity="1" />
-    <End Type="DictCnModel.课本" Role="课本" Multiplicity="*" />
+    <End Type="DictCnModel.分类" Multiplicity="1" Role="分类" />
+    <End Type="DictCnModel.课本" Multiplicity="*" Role="课本" />
   </Association>
   <Association Name="课本单词">
-    <End Type="DictCnModel.课本" Role="课本" Multiplicity="1" />
-    <End Type="DictCnModel.单词" Role="单词" Multiplicity="*" />
+    <End Type="DictCnModel.课本" Multiplicity="1" Role="课本" />
+    <End Type="DictCnModel.单词" Multiplicity="*" Role="单词" />
   </Association>
 </Schema>

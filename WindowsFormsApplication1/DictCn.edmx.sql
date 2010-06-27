@@ -2,9 +2,10 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 06/22/2010 15:51:38
+-- Date Created: 06/25/2010 13:29:05
 -- Generated from EDMX file: C:\Users\Administrator\Documents\Visual Studio 2010\Projects\WindowsFormsApplication1\WindowsFormsApplication1\DictCn.edmx
 -- --------------------------------------------------
+
 SET QUOTED_IDENTIFIER OFF;
 GO
 USE [C:\Users\Administrator\Documents\Visual Studio 2010\Projects\WindowsFormsApplication1\WindowsFormsApplication1\DictCn.MDF];
