@@ -101,6 +101,43 @@
       <EndProperty Name="扫描指针">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
+      <Condition ColumnName="单词_ID" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="分类扫描指针" TypeName="DictCnModel.分类扫描指针" StoreEntitySet="扫描指针集">
+      <EndProperty Name="分类">
+        <ScalarProperty Name="ID" ColumnName="分类_ID" />
+      </EndProperty>
+      <EndProperty Name="扫描指针">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="分类_ID" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="课本扫描指针" TypeName="DictCnModel.课本扫描指针" StoreEntitySet="扫描指针集">
+      <EndProperty Name="课本">
+        <ScalarProperty Name="ID" ColumnName="课本_ID" />
+      </EndProperty>
+      <EndProperty Name="扫描指针">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="课本_ID" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="分组扫描指针" TypeName="DictCnModel.分组扫描指针" StoreEntitySet="扫描指针集">
+      <EndProperty Name="分组">
+        <ScalarProperty Name="ID" ColumnName="分组_ID" />
+      </EndProperty>
+      <EndProperty Name="扫描指针">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="分组_ID" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="分页扫描指针" TypeName="DictCnModel.分页扫描指针" StoreEntitySet="扫描指针集">
+      <EndProperty Name="分页">
+        <ScalarProperty Name="ID" ColumnName="分页_ID" />
+      </EndProperty>
+      <EndProperty Name="扫描指针">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="分页_ID" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

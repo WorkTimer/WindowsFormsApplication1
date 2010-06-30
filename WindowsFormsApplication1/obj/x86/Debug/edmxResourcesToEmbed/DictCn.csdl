@@ -27,6 +27,22 @@
       <End Role="单词" EntitySet="单词集" />
       <End Role="扫描指针" EntitySet="扫描指针集" />
     </AssociationSet>
+    <AssociationSet Name="分类扫描指针" Association="DictCnModel.分类扫描指针">
+      <End Role="分类" EntitySet="分类集" />
+      <End Role="扫描指针" EntitySet="扫描指针集" />
+    </AssociationSet>
+    <AssociationSet Name="课本扫描指针" Association="DictCnModel.课本扫描指针">
+      <End Role="课本" EntitySet="课本集" />
+      <End Role="扫描指针" EntitySet="扫描指针集" />
+    </AssociationSet>
+    <AssociationSet Name="分组扫描指针" Association="DictCnModel.分组扫描指针">
+      <End Role="分组" EntitySet="分组集" />
+      <End Role="扫描指针" EntitySet="扫描指针集" />
+    </AssociationSet>
+    <AssociationSet Name="分页扫描指针" Association="DictCnModel.分页扫描指针">
+      <End Role="分页" EntitySet="分页集" />
+      <End Role="扫描指针" EntitySet="扫描指针集" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="分类">
     <Key>
@@ -36,6 +52,7 @@
     <Property Type="String" Name="名称" Nullable="false" />
     <Property Type="String" Name="地址" Nullable="false" />
     <NavigationProperty Name="课本" Relationship="DictCnModel.分类课本" FromRole="分类" ToRole="课本" />
+    <NavigationProperty Name="扫描指针" Relationship="DictCnModel.分类扫描指针" FromRole="分类" ToRole="扫描指针" />
   </EntityType>
   <EntityType Name="单词">
     <Key>
@@ -60,6 +77,7 @@
     <Property Type="Int32" Name="单词数量" Nullable="false" />
     <Property Type="Byte" Name="分组方式" Nullable="false" />
     <NavigationProperty Name="分组" Relationship="DictCnModel.课本分组" FromRole="课本" ToRole="分组" />
+    <NavigationProperty Name="扫描指针" Relationship="DictCnModel.课本扫描指针" FromRole="课本" ToRole="扫描指针" />
   </EntityType>
   <Association Name="分类课本">
     <End Type="DictCnModel.分类" Multiplicity="1" Role="分类" />
@@ -73,6 +91,10 @@
     <Property Type="String" Name="扫描日期" Nullable="false" />
     <Property Type="String" Name="当前地址" Nullable="false" />
     <NavigationProperty Name="单词" Relationship="DictCnModel.单词扫描指针" FromRole="扫描指针" ToRole="单词" />
+    <NavigationProperty Name="分类" Relationship="DictCnModel.分类扫描指针" FromRole="扫描指针" ToRole="分类" />
+    <NavigationProperty Name="课本" Relationship="DictCnModel.课本扫描指针" FromRole="扫描指针" ToRole="课本" />
+    <NavigationProperty Name="分组" Relationship="DictCnModel.分组扫描指针" FromRole="扫描指针" ToRole="分组" />
+    <NavigationProperty Name="分页" Relationship="DictCnModel.分页扫描指针" FromRole="扫描指针" ToRole="分页" />
   </EntityType>
   <EntityType Name="分组">
     <Key>
@@ -85,6 +107,7 @@
     <Property Type="String" Name="地址" Nullable="false" />
     <Property Type="Int32" Name="单词数量" Nullable="false" />
     <Property Type="Int32" Name="页数" Nullable="false" />
+    <NavigationProperty Name="扫描指针" Relationship="DictCnModel.分组扫描指针" FromRole="分组" ToRole="扫描指针" />
   </EntityType>
   <EntityType Name="分页">
     <Key>
@@ -96,6 +119,7 @@
     <Property Type="String" Name="名称" Nullable="false" />
     <Property Type="String" Name="地址" Nullable="false" />
     <Property Type="Int32" Name="单词数量" Nullable="false" />
+    <NavigationProperty Name="扫描指针" Relationship="DictCnModel.分页扫描指针" FromRole="分页" ToRole="扫描指针" />
   </EntityType>
   <Association Name="课本分组">
     <End Type="DictCnModel.课本" Role="课本" Multiplicity="1" />
@@ -110,7 +134,23 @@
     <End Type="DictCnModel.单词" Role="单词" Multiplicity="*" />
   </Association>
   <Association Name="单词扫描指针">
-    <End Type="DictCnModel.单词" Role="单词" Multiplicity="1" />
+    <End Type="DictCnModel.单词" Role="单词" Multiplicity="0..1" />
+    <End Type="DictCnModel.扫描指针" Role="扫描指针" Multiplicity="*" />
+  </Association>
+  <Association Name="分类扫描指针">
+    <End Type="DictCnModel.分类" Role="分类" Multiplicity="0..1" />
+    <End Type="DictCnModel.扫描指针" Role="扫描指针" Multiplicity="*" />
+  </Association>
+  <Association Name="课本扫描指针">
+    <End Type="DictCnModel.课本" Role="课本" Multiplicity="0..1" />
+    <End Type="DictCnModel.扫描指针" Role="扫描指针" Multiplicity="*" />
+  </Association>
+  <Association Name="分组扫描指针">
+    <End Type="DictCnModel.分组" Role="分组" Multiplicity="0..1" />
+    <End Type="DictCnModel.扫描指针" Role="扫描指针" Multiplicity="*" />
+  </Association>
+  <Association Name="分页扫描指针">
+    <End Type="DictCnModel.分页" Role="分页" Multiplicity="0..1" />
     <End Type="DictCnModel.扫描指针" Role="扫描指针" Multiplicity="*" />
   </Association>
 </Schema>

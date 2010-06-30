@@ -22,7 +22,11 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("DictCnModel", "课本分组", "课本", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WindowsFormsApplication1.课本), "分组", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WindowsFormsApplication1.分组))]
 [assembly: EdmRelationshipAttribute("DictCnModel", "分组分页", "分组", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WindowsFormsApplication1.分组), "分页", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WindowsFormsApplication1.分页))]
 [assembly: EdmRelationshipAttribute("DictCnModel", "分页单词", "分页", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WindowsFormsApplication1.分页), "单词", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WindowsFormsApplication1.单词))]
-[assembly: EdmRelationshipAttribute("DictCnModel", "单词扫描指针", "单词", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WindowsFormsApplication1.单词), "扫描指针", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WindowsFormsApplication1.扫描指针))]
+[assembly: EdmRelationshipAttribute("DictCnModel", "单词扫描指针", "单词", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(WindowsFormsApplication1.单词), "扫描指针", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WindowsFormsApplication1.扫描指针))]
+[assembly: EdmRelationshipAttribute("DictCnModel", "分类扫描指针", "分类", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(WindowsFormsApplication1.分类), "扫描指针", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WindowsFormsApplication1.扫描指针))]
+[assembly: EdmRelationshipAttribute("DictCnModel", "课本扫描指针", "课本", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(WindowsFormsApplication1.课本), "扫描指针", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WindowsFormsApplication1.扫描指针))]
+[assembly: EdmRelationshipAttribute("DictCnModel", "分组扫描指针", "分组", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(WindowsFormsApplication1.分组), "扫描指针", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WindowsFormsApplication1.扫描指针))]
+[assembly: EdmRelationshipAttribute("DictCnModel", "分页扫描指针", "分页", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(WindowsFormsApplication1.分页), "扫描指针", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WindowsFormsApplication1.扫描指针))]
 
 #endregion
 
@@ -357,6 +361,28 @@ namespace WindowsFormsApplication1
                 }
             }
         }
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DictCnModel", "分类扫描指针", "扫描指针")]
+        public EntityCollection<扫描指针> 扫描指针
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<扫描指针>("DictCnModel.分类扫描指针", "扫描指针");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<扫描指针>("DictCnModel.分类扫描指针", "扫描指针", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -579,6 +605,28 @@ namespace WindowsFormsApplication1
                 }
             }
         }
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DictCnModel", "分组扫描指针", "扫描指针")]
+        public EntityCollection<扫描指针> 扫描指针
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<扫描指针>("DictCnModel.分组扫描指针", "扫描指针");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<扫描指针>("DictCnModel.分组扫描指针", "扫描指针", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -772,6 +820,28 @@ namespace WindowsFormsApplication1
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<单词>("DictCnModel.分页单词", "单词", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DictCnModel", "分页扫描指针", "扫描指针")]
+        public EntityCollection<扫描指针> 扫描指针
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<扫描指针>("DictCnModel.分页扫描指针", "扫描指针");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<扫描指针>("DictCnModel.分页扫描指针", "扫描指针", value);
                 }
             }
         }
@@ -1145,6 +1215,158 @@ namespace WindowsFormsApplication1
                 }
             }
         }
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DictCnModel", "分类扫描指针", "分类")]
+        public 分类 分类
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<分类>("DictCnModel.分类扫描指针", "分类").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<分类>("DictCnModel.分类扫描指针", "分类").Value = value;
+            }
+        }
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<分类> 分类Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<分类>("DictCnModel.分类扫描指针", "分类");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<分类>("DictCnModel.分类扫描指针", "分类", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DictCnModel", "课本扫描指针", "课本")]
+        public 课本 课本
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<课本>("DictCnModel.课本扫描指针", "课本").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<课本>("DictCnModel.课本扫描指针", "课本").Value = value;
+            }
+        }
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<课本> 课本Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<课本>("DictCnModel.课本扫描指针", "课本");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<课本>("DictCnModel.课本扫描指针", "课本", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DictCnModel", "分组扫描指针", "分组")]
+        public 分组 分组
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<分组>("DictCnModel.分组扫描指针", "分组").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<分组>("DictCnModel.分组扫描指针", "分组").Value = value;
+            }
+        }
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<分组> 分组Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<分组>("DictCnModel.分组扫描指针", "分组");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<分组>("DictCnModel.分组扫描指针", "分组", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DictCnModel", "分页扫描指针", "分页")]
+        public 分页 分页
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<分页>("DictCnModel.分页扫描指针", "分页").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<分页>("DictCnModel.分页扫描指针", "分页").Value = value;
+            }
+        }
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<分页> 分页Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<分页>("DictCnModel.分页扫描指针", "分页");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<分页>("DictCnModel.分页扫描指针", "分页", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -1364,6 +1586,28 @@ namespace WindowsFormsApplication1
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<分组>("DictCnModel.课本分组", "分组", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("DictCnModel", "课本扫描指针", "扫描指针")]
+        public EntityCollection<扫描指针> 扫描指针
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<扫描指针>("DictCnModel.课本扫描指针", "扫描指针");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<扫描指针>("DictCnModel.课本扫描指针", "扫描指针", value);
                 }
             }
         }
