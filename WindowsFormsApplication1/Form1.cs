@@ -46,7 +46,6 @@ namespace WindowsFormsApplication1
                     {
                         名称 = htmlNode.InnerText,
                         地址 = htmlNode.Attributes["href"].Value,
-                        更新日期 = DateTime.Now,
                     };
                     //分类 my = 分类.Create分类(i++, htmlNode.InnerText, htmlNode.Attributes["href"].Value);
                     context.分类集.AddObject(my);
@@ -78,10 +77,7 @@ namespace WindowsFormsApplication1
         {
             //this.dataGridView1.DataSourceChanged += new System.EventHandler(this.dataGridView1_DataSourceChanged);
             this.webBrowser1.DocumentCompleted -= new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
-            foreach (分类 my分类 in context.分类集)
-            {
-                
-            }
+            //context.分类集
             //this.webBrowser1.Navigate("");
         }
 

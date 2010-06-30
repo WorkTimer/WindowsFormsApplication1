@@ -8,9 +8,24 @@
       <End EntitySet="分类集" Role="分类" />
       <End EntitySet="课本集" Role="课本" />
     </AssociationSet>
-    <AssociationSet Name="课本单词" Association="DictCnModel.课本单词">
-      <End EntitySet="课本集" Role="课本" />
-      <End EntitySet="单词集" Role="单词" />
+    <EntitySet Name="扫描指针集" EntityType="DictCnModel.扫描指针" />
+    <EntitySet Name="分组集" EntityType="DictCnModel.分组" />
+    <EntitySet Name="分页集" EntityType="DictCnModel.分页" />
+    <AssociationSet Name="课本分组" Association="DictCnModel.课本分组">
+      <End Role="课本" EntitySet="课本集" />
+      <End Role="分组" EntitySet="分组集" />
+    </AssociationSet>
+    <AssociationSet Name="分组分页" Association="DictCnModel.分组分页">
+      <End Role="分组" EntitySet="分组集" />
+      <End Role="分页" EntitySet="分页集" />
+    </AssociationSet>
+    <AssociationSet Name="分页单词" Association="DictCnModel.分页单词">
+      <End Role="分页" EntitySet="分页集" />
+      <End Role="单词" EntitySet="单词集" />
+    </AssociationSet>
+    <AssociationSet Name="单词扫描指针" Association="DictCnModel.单词扫描指针">
+      <End Role="单词" EntitySet="单词集" />
+      <End Role="扫描指针" EntitySet="扫描指针集" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="分类">
@@ -21,7 +36,6 @@
     <Property Type="String" Name="名称" Nullable="false" />
     <Property Type="String" Name="地址" Nullable="false" />
     <NavigationProperty Name="课本" Relationship="DictCnModel.分类课本" FromRole="分类" ToRole="课本" />
-    <Property Type="DateTime" Name="更新日期" Nullable="false" />
   </EntityType>
   <EntityType Name="单词">
     <Key>
@@ -30,15 +44,10 @@
     <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Type="String" Name="拼写" Nullable="false" />
     <Property Type="String" Name="音标" Nullable="false" />
-    <Property Type="DateTime" Name="更新日期" Nullable="false" />
-    <NavigationProperty Name="课本" Relationship="DictCnModel.课本单词" FromRole="单词" ToRole="课本" />
     <Property Type="String" Name="解释" Nullable="false" />
     <Property Type="String" Name="读音" Nullable="false" />
-    <Property Type="String" Name="本组词数" Nullable="false" />
-    <Property Type="String" Name="组地址" Nullable="false" />
-    <Property Type="String" Name="页地址" Nullable="false" />
-    <Property Type="String" Name="所在组" Nullable="false" />
-    <Property Type="String" Name="所在页" Nullable="false" />
+    <NavigationProperty Name="分页" Relationship="DictCnModel.分页单词" FromRole="单词" ToRole="分页" />
+    <NavigationProperty Name="扫描指针" Relationship="DictCnModel.单词扫描指针" FromRole="单词" ToRole="扫描指针" />
   </EntityType>
   <EntityType Name="课本">
     <Key>
@@ -46,20 +55,62 @@
     </Key>
     <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="分类" Relationship="DictCnModel.分类课本" FromRole="课本" ToRole="分类" />
-    <NavigationProperty Name="单词" Relationship="DictCnModel.课本单词" FromRole="课本" ToRole="单词" />
-    <Property Type="DateTime" Name="更新日期" Nullable="false" />
     <Property Type="String" Name="名称" Nullable="false" />
     <Property Type="String" Name="地址" Nullable="false" />
     <Property Type="Int32" Name="单词数量" Nullable="false" />
     <Property Type="Byte" Name="分组方式" Nullable="false" />
-    <Property Type="Int32" Name="分组总数" Nullable="false" />
+    <NavigationProperty Name="分组" Relationship="DictCnModel.课本分组" FromRole="课本" ToRole="分组" />
   </EntityType>
   <Association Name="分类课本">
     <End Type="DictCnModel.分类" Multiplicity="1" Role="分类" />
     <End Type="DictCnModel.课本" Multiplicity="*" Role="课本" />
   </Association>
-  <Association Name="课本单词">
-    <End Type="DictCnModel.课本" Multiplicity="1" Role="课本" />
-    <End Type="DictCnModel.单词" Multiplicity="*" Role="单词" />
+  <EntityType Name="扫描指针">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="扫描日期" Nullable="false" />
+    <Property Type="String" Name="当前地址" Nullable="false" />
+    <NavigationProperty Name="单词" Relationship="DictCnModel.单词扫描指针" FromRole="扫描指针" ToRole="单词" />
+  </EntityType>
+  <EntityType Name="分组">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="课本" Relationship="DictCnModel.课本分组" FromRole="分组" ToRole="课本" />
+    <NavigationProperty Name="分页" Relationship="DictCnModel.分组分页" FromRole="分组" ToRole="分页" />
+    <Property Type="String" Name="名称" Nullable="false" />
+    <Property Type="String" Name="地址" Nullable="false" />
+    <Property Type="Int32" Name="单词数量" Nullable="false" />
+    <Property Type="Int32" Name="页数" Nullable="false" />
+  </EntityType>
+  <EntityType Name="分页">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="分组" Relationship="DictCnModel.分组分页" FromRole="分页" ToRole="分组" />
+    <NavigationProperty Name="单词" Relationship="DictCnModel.分页单词" FromRole="分页" ToRole="单词" />
+    <Property Type="String" Name="名称" Nullable="false" />
+    <Property Type="String" Name="地址" Nullable="false" />
+    <Property Type="Int32" Name="单词数量" Nullable="false" />
+  </EntityType>
+  <Association Name="课本分组">
+    <End Type="DictCnModel.课本" Role="课本" Multiplicity="1" />
+    <End Type="DictCnModel.分组" Role="分组" Multiplicity="*" />
+  </Association>
+  <Association Name="分组分页">
+    <End Type="DictCnModel.分组" Role="分组" Multiplicity="1" />
+    <End Type="DictCnModel.分页" Role="分页" Multiplicity="*" />
+  </Association>
+  <Association Name="分页单词">
+    <End Type="DictCnModel.分页" Role="分页" Multiplicity="1" />
+    <End Type="DictCnModel.单词" Role="单词" Multiplicity="*" />
+  </Association>
+  <Association Name="单词扫描指针">
+    <End Type="DictCnModel.单词" Role="单词" Multiplicity="1" />
+    <End Type="DictCnModel.扫描指针" Role="扫描指针" Multiplicity="*" />
   </Association>
 </Schema>

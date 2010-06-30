@@ -7,7 +7,6 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="名称" ColumnName="名称" />
           <ScalarProperty Name="地址" ColumnName="地址" />
-          <ScalarProperty Name="更新日期" ColumnName="更新日期" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -17,14 +16,8 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="拼写" ColumnName="拼写" />
           <ScalarProperty Name="音标" ColumnName="音标" />
-          <ScalarProperty Name="更新日期" ColumnName="更新日期" />
           <ScalarProperty Name="解释" ColumnName="解释" />
           <ScalarProperty Name="读音" ColumnName="读音" />
-          <ScalarProperty Name="本组词数" ColumnName="本组词数" />
-          <ScalarProperty Name="组地址" ColumnName="组地址" />
-          <ScalarProperty Name="页地址" ColumnName="页地址" />
-          <ScalarProperty Name="所在组" ColumnName="所在组" />
-          <ScalarProperty Name="所在页" ColumnName="所在页" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -32,12 +25,40 @@
       <EntityTypeMapping TypeName="IsTypeOf(DictCnModel.课本)">
         <MappingFragment StoreEntitySet="课本集">
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="更新日期" ColumnName="更新日期" />
           <ScalarProperty Name="名称" ColumnName="名称" />
           <ScalarProperty Name="地址" ColumnName="地址" />
           <ScalarProperty Name="单词数量" ColumnName="单词数量" />
           <ScalarProperty Name="分组方式" ColumnName="分组方式" />
-          <ScalarProperty Name="分组总数" ColumnName="分组总数" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="扫描指针集">
+      <EntityTypeMapping TypeName="IsTypeOf(DictCnModel.扫描指针)">
+        <MappingFragment StoreEntitySet="扫描指针集">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="扫描日期" ColumnName="扫描日期" />
+          <ScalarProperty Name="当前地址" ColumnName="当前地址" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="分组集">
+      <EntityTypeMapping TypeName="IsTypeOf(DictCnModel.分组)">
+        <MappingFragment StoreEntitySet="分组集">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="名称" ColumnName="名称" />
+          <ScalarProperty Name="地址" ColumnName="地址" />
+          <ScalarProperty Name="单词数量" ColumnName="单词数量" />
+          <ScalarProperty Name="页数" ColumnName="页数" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="分页集">
+      <EntityTypeMapping TypeName="IsTypeOf(DictCnModel.分页)">
+        <MappingFragment StoreEntitySet="分页集">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="名称" ColumnName="名称" />
+          <ScalarProperty Name="地址" ColumnName="地址" />
+          <ScalarProperty Name="单词数量" ColumnName="单词数量" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -49,11 +70,35 @@
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="课本单词" TypeName="DictCnModel.课本单词" StoreEntitySet="单词集">
+    <AssociationSetMapping Name="课本分组" TypeName="DictCnModel.课本分组" StoreEntitySet="分组集">
       <EndProperty Name="课本">
         <ScalarProperty Name="ID" ColumnName="课本_ID" />
       </EndProperty>
+      <EndProperty Name="分组">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="分组分页" TypeName="DictCnModel.分组分页" StoreEntitySet="分页集">
+      <EndProperty Name="分组">
+        <ScalarProperty Name="ID" ColumnName="分组_ID" />
+      </EndProperty>
+      <EndProperty Name="分页">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="分页单词" TypeName="DictCnModel.分页单词" StoreEntitySet="单词集">
+      <EndProperty Name="分页">
+        <ScalarProperty Name="ID" ColumnName="分页_ID" />
+      </EndProperty>
       <EndProperty Name="单词">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="单词扫描指针" TypeName="DictCnModel.单词扫描指针" StoreEntitySet="扫描指针集">
+      <EndProperty Name="单词">
+        <ScalarProperty Name="ID" ColumnName="单词_ID" />
+      </EndProperty>
+      <EndProperty Name="扫描指针">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
     </AssociationSetMapping>
