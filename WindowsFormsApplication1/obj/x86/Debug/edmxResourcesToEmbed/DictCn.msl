@@ -37,7 +37,8 @@
         <MappingFragment StoreEntitySet="扫描指针集">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="扫描日期" ColumnName="扫描日期" />
-          <ScalarProperty Name="当前地址" ColumnName="当前地址" />
+          <ScalarProperty Name="扫描地址" ColumnName="扫描地址" />
+          <ScalarProperty Name="扫描类型" ColumnName="扫描类型" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

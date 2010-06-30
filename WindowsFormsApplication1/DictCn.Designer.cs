@@ -1086,13 +1086,15 @@ namespace WindowsFormsApplication1
         /// </summary>
         /// <param name="id">ID 属性的初始值。</param>
         /// <param name="扫描日期">扫描日期 属性的初始值。</param>
-        /// <param name="当前地址">当前地址 属性的初始值。</param>
-        public static 扫描指针 Create扫描指针(global::System.Int32 id, global::System.String 扫描日期, global::System.String 当前地址)
+        /// <param name="扫描地址">扫描地址 属性的初始值。</param>
+        /// <param name="扫描类型">扫描类型 属性的初始值。</param>
+        public static 扫描指针 Create扫描指针(global::System.Int32 id, global::System.DateTime 扫描日期, global::System.String 扫描地址, global::System.String 扫描类型)
         {
             扫描指针 扫描指针 = new 扫描指针();
             扫描指针.ID = id;
             扫描指针.扫描日期 = 扫描日期;
-            扫描指针.当前地址 = 当前地址;
+            扫描指针.扫描地址 = 扫描地址;
+            扫描指针.扫描类型 = 扫描类型;
             return 扫描指针;
         }
 
@@ -1131,7 +1133,7 @@ namespace WindowsFormsApplication1
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String 扫描日期
+        public global::System.DateTime 扫描日期
         {
             get
             {
@@ -1141,13 +1143,13 @@ namespace WindowsFormsApplication1
             {
                 On扫描日期Changing(value);
                 ReportPropertyChanging("扫描日期");
-                _扫描日期 = StructuralObject.SetValidValue(value, false);
+                _扫描日期 = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("扫描日期");
                 On扫描日期Changed();
             }
         }
-        private global::System.String _扫描日期;
-        partial void On扫描日期Changing(global::System.String value);
+        private global::System.DateTime _扫描日期;
+        partial void On扫描日期Changing(global::System.DateTime value);
         partial void On扫描日期Changed();
     
         /// <summary>
@@ -1155,24 +1157,48 @@ namespace WindowsFormsApplication1
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String 当前地址
+        public global::System.String 扫描地址
         {
             get
             {
-                return _当前地址;
+                return _扫描地址;
             }
             set
             {
-                On当前地址Changing(value);
-                ReportPropertyChanging("当前地址");
-                _当前地址 = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("当前地址");
-                On当前地址Changed();
+                On扫描地址Changing(value);
+                ReportPropertyChanging("扫描地址");
+                _扫描地址 = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("扫描地址");
+                On扫描地址Changed();
             }
         }
-        private global::System.String _当前地址;
-        partial void On当前地址Changing(global::System.String value);
-        partial void On当前地址Changed();
+        private global::System.String _扫描地址;
+        partial void On扫描地址Changing(global::System.String value);
+        partial void On扫描地址Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String 扫描类型
+        {
+            get
+            {
+                return _扫描类型;
+            }
+            set
+            {
+                On扫描类型Changing(value);
+                ReportPropertyChanging("扫描类型");
+                _扫描类型 = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("扫描类型");
+                On扫描类型Changed();
+            }
+        }
+        private global::System.String _扫描类型;
+        partial void On扫描类型Changing(global::System.String value);
+        partial void On扫描类型Changed();
 
         #endregion
     

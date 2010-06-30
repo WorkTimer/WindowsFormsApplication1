@@ -84,8 +84,9 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="扫描日期" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="当前地址" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="扫描日期" Type="datetime" Nullable="false" />
+    <Property Name="扫描地址" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="扫描类型" Type="nvarchar(max)" Nullable="false" />
     <Property Name="单词_ID" Type="int" Nullable="true" />
     <Property Name="分类_ID" Type="int" Nullable="true" />
     <Property Name="课本_ID" Type="int" Nullable="true" />
@@ -313,13 +314,14 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="扫描日期" Nullable="false" />
-          <Property Type="String" Name="当前地址" Nullable="false" />
+          <Property Type="DateTime" Name="扫描日期" Nullable="false" />
+          <Property Type="String" Name="扫描地址" Nullable="false" />
           <NavigationProperty Name="单词" Relationship="DictCnModel.单词扫描指针" FromRole="扫描指针" ToRole="单词" />
           <NavigationProperty Name="分类" Relationship="DictCnModel.分类扫描指针" FromRole="扫描指针" ToRole="分类" />
           <NavigationProperty Name="课本" Relationship="DictCnModel.课本扫描指针" FromRole="扫描指针" ToRole="课本" />
           <NavigationProperty Name="分组" Relationship="DictCnModel.分组扫描指针" FromRole="扫描指针" ToRole="分组" />
           <NavigationProperty Name="分页" Relationship="DictCnModel.分页扫描指针" FromRole="扫描指针" ToRole="分页" />
+          <Property Type="String" Name="扫描类型" Nullable="false" />
         </EntityType>
         <EntityType Name="分组">
           <Key>
@@ -420,7 +422,8 @@
         <MappingFragment StoreEntitySet="扫描指针集">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="扫描日期" ColumnName="扫描日期" />
-          <ScalarProperty Name="当前地址" ColumnName="当前地址" />
+          <ScalarProperty Name="扫描地址" ColumnName="扫描地址" />
+          <ScalarProperty Name="扫描类型" ColumnName="扫描类型" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -549,7 +552,7 @@
           <ConnectorPoint PointX="8.5" PointY="1.3895064290364585" />
           <ConnectorPoint PointX="8" PointY="1.3895064290364585" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="DictCnModel.扫描指针" Width="1.5" PointX="4.875" PointY="3.5" Height="2.5430916341145826" />
+        <EntityTypeShape EntityType="DictCnModel.扫描指针" Width="1.5" PointX="4.875" PointY="3.5" Height="2.7341113281249996" />
         <EntityTypeShape EntityType="DictCnModel.分组" Width="1.5" PointX="4.625" PointY="0.5" Height="2.3520719401041661" />
         <EntityTypeShape EntityType="DictCnModel.分页" Width="1.5" PointX="2.75" PointY="0.5" Height="2.16105224609375" />
         <AssociationConnector Association="DictCnModel.课本分组">
@@ -565,14 +568,14 @@
           <ConnectorPoint PointX="2.125" PointY="1.5805261230468748" />
         </AssociationConnector>
         <AssociationConnector Association="DictCnModel.单词扫描指针">
-          <ConnectorPoint PointX="1.1289053125000002" PointY="3.0430916341145831" />
-          <ConnectorPoint PointX="1.1289053125000002" PointY="5.2585423342260125" />
-          <ConnectorPoint PointX="4.875" PointY="5.2585423342260125" />
+          <ConnectorPoint PointX="1.375" PointY="2.8520719401041661" />
+          <ConnectorPoint PointX="1.375" PointY="4.9018951881211645" />
+          <ConnectorPoint PointX="4.875" PointY="4.9018951881211645" />
         </AssociationConnector>
         <AssociationConnector Association="DictCnModel.分类扫描指针">
           <ConnectorPoint PointX="9.25" PointY="2.4700325520833335" />
-          <ConnectorPoint PointX="9.25" PointY="4.8505532405598952" />
-          <ConnectorPoint PointX="6.375" PointY="4.8505532405598952" />
+          <ConnectorPoint PointX="9.25" PointY="4.9018951881211645" />
+          <ConnectorPoint PointX="6.375" PointY="4.9018951881211645" />
         </AssociationConnector>
         <AssociationConnector Association="DictCnModel.课本扫描指针">
           <ConnectorPoint PointX="6.5" PointY="3.0430916341145831" />

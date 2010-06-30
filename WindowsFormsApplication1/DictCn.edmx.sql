@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 06/30/2010 13:20:16
+-- Date Created: 06/30/2010 16:28:33
 -- Generated from EDMX file: C:\Users\Administrator\Documents\Visual Studio 2010\Projects\WindowsFormsApplication1\WindowsFormsApplication1\DictCn.edmx
 -- --------------------------------------------------
 
@@ -105,8 +105,9 @@ GO
 -- Creating table '扫描指针集'
 CREATE TABLE [dbo].[扫描指针集] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [扫描日期] nvarchar(max)  NOT NULL,
-    [当前地址] nvarchar(max)  NOT NULL,
+    [扫描日期] datetime  NOT NULL,
+    [扫描地址] nvarchar(max)  NOT NULL,
+    [扫描类型] nvarchar(max)  NOT NULL,
     [单词_ID] int  NULL,
     [分类_ID] int  NULL,
     [课本_ID] int  NULL,

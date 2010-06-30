@@ -88,13 +88,14 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="扫描日期" Nullable="false" />
-    <Property Type="String" Name="当前地址" Nullable="false" />
+    <Property Type="DateTime" Name="扫描日期" Nullable="false" />
+    <Property Type="String" Name="扫描地址" Nullable="false" />
     <NavigationProperty Name="单词" Relationship="DictCnModel.单词扫描指针" FromRole="扫描指针" ToRole="单词" />
     <NavigationProperty Name="分类" Relationship="DictCnModel.分类扫描指针" FromRole="扫描指针" ToRole="分类" />
     <NavigationProperty Name="课本" Relationship="DictCnModel.课本扫描指针" FromRole="扫描指针" ToRole="课本" />
     <NavigationProperty Name="分组" Relationship="DictCnModel.分组扫描指针" FromRole="扫描指针" ToRole="分组" />
     <NavigationProperty Name="分页" Relationship="DictCnModel.分页扫描指针" FromRole="扫描指针" ToRole="分页" />
+    <Property Type="String" Name="扫描类型" Nullable="false" />
   </EntityType>
   <EntityType Name="分组">
     <Key>
