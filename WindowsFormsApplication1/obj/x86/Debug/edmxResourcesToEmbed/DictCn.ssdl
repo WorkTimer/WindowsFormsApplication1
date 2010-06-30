@@ -4,13 +4,44 @@
     <EntitySet Name="分类集" EntityType="DictCnModel.Store.分类集" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="单词集" EntityType="DictCnModel.Store.单词集" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="课本集" EntityType="DictCnModel.Store.课本集" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="扫描指针集" EntityType="DictCnModel.Store.扫描指针集" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="分组集" EntityType="DictCnModel.Store.分组集" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="分页集" EntityType="DictCnModel.Store.分页集" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="分类课本" Association="DictCnModel.Store.分类课本">
       <End Role="分类" EntitySet="分类集" />
       <End Role="课本" EntitySet="课本集" />
     </AssociationSet>
-    <AssociationSet Name="课本单词" Association="DictCnModel.Store.课本单词">
+    <AssociationSet Name="课本分组" Association="DictCnModel.Store.课本分组">
       <End Role="课本" EntitySet="课本集" />
+      <End Role="分组" EntitySet="分组集" />
+    </AssociationSet>
+    <AssociationSet Name="分组分页" Association="DictCnModel.Store.分组分页">
+      <End Role="分组" EntitySet="分组集" />
+      <End Role="分页" EntitySet="分页集" />
+    </AssociationSet>
+    <AssociationSet Name="分页单词" Association="DictCnModel.Store.分页单词">
+      <End Role="分页" EntitySet="分页集" />
       <End Role="单词" EntitySet="单词集" />
+    </AssociationSet>
+    <AssociationSet Name="单词扫描指针" Association="DictCnModel.Store.单词扫描指针">
+      <End Role="单词" EntitySet="单词集" />
+      <End Role="扫描指针" EntitySet="扫描指针集" />
+    </AssociationSet>
+    <AssociationSet Name="分类扫描指针" Association="DictCnModel.Store.分类扫描指针">
+      <End Role="分类" EntitySet="分类集" />
+      <End Role="扫描指针" EntitySet="扫描指针集" />
+    </AssociationSet>
+    <AssociationSet Name="课本扫描指针" Association="DictCnModel.Store.课本扫描指针">
+      <End Role="课本" EntitySet="课本集" />
+      <End Role="扫描指针" EntitySet="扫描指针集" />
+    </AssociationSet>
+    <AssociationSet Name="分组扫描指针" Association="DictCnModel.Store.分组扫描指针">
+      <End Role="分组" EntitySet="分组集" />
+      <End Role="扫描指针" EntitySet="扫描指针集" />
+    </AssociationSet>
+    <AssociationSet Name="分页扫描指针" Association="DictCnModel.Store.分页扫描指针">
+      <End Role="分页" EntitySet="分页集" />
+      <End Role="扫描指针" EntitySet="扫描指针集" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="分类集">
@@ -20,7 +51,6 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="名称" Type="nvarchar(max)" Nullable="false" />
     <Property Name="地址" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="更新日期" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="单词集">
     <Key>
@@ -29,28 +59,55 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="拼写" Type="nvarchar(max)" Nullable="false" />
     <Property Name="音标" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="更新日期" Type="datetime" Nullable="false" />
     <Property Name="解释" Type="nvarchar(max)" Nullable="false" />
     <Property Name="读音" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="本组词数" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="组地址" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="页地址" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="所在组" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="所在页" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="课本_ID" Type="int" Nullable="false" />
+    <Property Name="分页_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="课本集">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="更新日期" Type="datetime" Nullable="false" />
     <Property Name="名称" Type="nvarchar(max)" Nullable="false" />
     <Property Name="地址" Type="nvarchar(max)" Nullable="false" />
     <Property Name="单词数量" Type="int" Nullable="false" />
     <Property Name="分组方式" Type="tinyint" Nullable="false" />
-    <Property Name="分组总数" Type="int" Nullable="false" />
     <Property Name="分类_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="扫描指针集">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="扫描日期" Type="datetime" Nullable="false" />
+    <Property Name="扫描地址" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="扫描类型" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="单词_ID" Type="int" Nullable="true" />
+    <Property Name="分类_ID" Type="int" Nullable="true" />
+    <Property Name="课本_ID" Type="int" Nullable="true" />
+    <Property Name="分组_ID" Type="int" Nullable="true" />
+    <Property Name="分页_ID" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="分组集">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="名称" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="地址" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="单词数量" Type="int" Nullable="false" />
+    <Property Name="页数" Type="int" Nullable="false" />
+    <Property Name="课本_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="分页集">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="名称" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="地址" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="单词数量" Type="int" Nullable="false" />
+    <Property Name="分组_ID" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="分类课本">
     <End Role="分类" Type="DictCnModel.Store.分类集" Multiplicity="1" />
@@ -64,15 +121,99 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="课本单词">
+  <Association Name="课本分组">
     <End Role="课本" Type="DictCnModel.Store.课本集" Multiplicity="1" />
-    <End Role="单词" Type="DictCnModel.Store.单词集" Multiplicity="*" />
+    <End Role="分组" Type="DictCnModel.Store.分组集" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="课本">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="单词">
+      <Dependent Role="分组">
         <PropertyRef Name="课本_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="分组分页">
+    <End Role="分组" Type="DictCnModel.Store.分组集" Multiplicity="1" />
+    <End Role="分页" Type="DictCnModel.Store.分页集" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="分组">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="分页">
+        <PropertyRef Name="分组_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="分页单词">
+    <End Role="分页" Type="DictCnModel.Store.分页集" Multiplicity="1" />
+    <End Role="单词" Type="DictCnModel.Store.单词集" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="分页">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="单词">
+        <PropertyRef Name="分页_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="单词扫描指针">
+    <End Role="单词" Type="DictCnModel.Store.单词集" Multiplicity="0..1" />
+    <End Role="扫描指针" Type="DictCnModel.Store.扫描指针集" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="单词">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="扫描指针">
+        <PropertyRef Name="单词_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="分类扫描指针">
+    <End Role="分类" Type="DictCnModel.Store.分类集" Multiplicity="0..1" />
+    <End Role="扫描指针" Type="DictCnModel.Store.扫描指针集" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="分类">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="扫描指针">
+        <PropertyRef Name="分类_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="课本扫描指针">
+    <End Role="课本" Type="DictCnModel.Store.课本集" Multiplicity="0..1" />
+    <End Role="扫描指针" Type="DictCnModel.Store.扫描指针集" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="课本">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="扫描指针">
+        <PropertyRef Name="课本_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="分组扫描指针">
+    <End Role="分组" Type="DictCnModel.Store.分组集" Multiplicity="0..1" />
+    <End Role="扫描指针" Type="DictCnModel.Store.扫描指针集" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="分组">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="扫描指针">
+        <PropertyRef Name="分组_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="分页扫描指针">
+    <End Role="分页" Type="DictCnModel.Store.分页集" Multiplicity="0..1" />
+    <End Role="扫描指针" Type="DictCnModel.Store.扫描指针集" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="分页">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="扫描指针">
+        <PropertyRef Name="分页_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
