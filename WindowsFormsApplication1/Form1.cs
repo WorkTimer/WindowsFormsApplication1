@@ -17,6 +17,7 @@ namespace WindowsFormsApplication1
             InitializeComponent();
         }
         private DictCnEntities m_context = null;
+        private const String m_StartAddress = "http://dict.cn/bdc/";
         private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             if (e.Url != this.webBrowser1.Url) return;
@@ -25,41 +26,37 @@ namespace WindowsFormsApplication1
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             doc.Load(web.DocumentStream);
             HtmlNodeCollection htmlNodes = doc.DocumentNode.SelectNodes("//*[@id=\"main_left\"]/div[h3=\"在线背单词\"]/ul[1]/li/a");
-            //var numQuery = from htmlNode in htmlNodes
-            //               where htmlNode.InnerText != null
-            //               select htmlNode;
-            // new DictCnEntities
-            //foreach (HtmlNode htmlNode in htmlNodes)
-            //{
-            //    //htmlNode.InnerText
-            //    int i = 0;
-            //}
-            //this.dictCnEntitiesBindingSource
-            if (m_context == null) m_context = new DictCnEntities();
 
+            if (m_context == null) m_context = new DictCnEntities();
             try
             {
                 int i = 0;
                 foreach (HtmlNode htmlNode in htmlNodes)
                 {
-                    分类 my = new 分类
+                    string my名称 = htmlNode.InnerText;
+                    string my地址 = htmlNode.Attributes["href"].Value;
+                    分类 my分类 = (from o in m_context.分类集 where o.地址 == my地址 && o.名称 == my名称 select o).FirstOrDefault();
+                    if (my分类 == null)
                     {
-                        名称 = htmlNode.InnerText,
-                        地址 = htmlNode.Attributes["href"].Value,
-                    };
-                    //分类 my = 分类.Create分类(i++, htmlNode.InnerText, htmlNode.Attributes["href"].Value);
-                    m_context.分类集.AddObject(my);
+                        my分类 = new 分类
+                        {
+                            名称 = my名称,
+                            地址 = my地址
+                        };
+                        m_context.分类集.AddObject(my分类);
+                    }
                 }
                 
-                //var query = from aaa in context.扫描指针集 where aaa.ID == 1 select aaa;//context.扫描指针集
                 扫描指针 my扫描指针 = m_context.扫描指针集.SingleOrDefault();
                 if (my扫描指针 == null)
-                    m_context.扫描指针集.AddObject(new 扫描指针 { ID = 1, 扫描日期 = DateTime.Now, 扫描地址 = "http://dict.cn/bdc/" });
+                    m_context.扫描指针集.AddObject(new 扫描指针 { ID = 1, 扫描日期 = DateTime.Now, 扫描地址 = m_StartAddress, 扫描类型 = "", 当前ID = 0 });
                 else
                 {
                     my扫描指针.ID = 1;
                     my扫描指针.扫描日期 = DateTime.Now;
-                    my扫描指针.扫描地址 = "http://dict.cn/bdc/";
+                    my扫描指针.扫描地址 = m_StartAddress;
+                    my扫描指针.扫描类型 = "";
+                    my扫描指针.当前ID = 0;
                 }
                 i = m_context.SaveChanges();
                 this.dataGridView1.DataSource = m_context.分类集;
@@ -68,7 +65,6 @@ namespace WindowsFormsApplication1
             {
                 this.toolStripStatusLabel1.Text = ex.Message;
             }
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -76,6 +72,9 @@ namespace WindowsFormsApplication1
             
             //this.toolStripTextBox1.Text = this.webBrowser1.Url.AbsolutePath;
             //this.webBrowser1.Url = new System.Uri(this.toolStripTextBox1.Text, System.UriKind.Absolute);
+            //this.webBrowser1.Url = new System.Uri("http://dict.cn/bdc/", System.UriKind.Absolute);
+            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
+            this.webBrowser1.Navigate(m_StartAddress);
             this.toolStripTextBox1.Size = new Size(this.toolStrip2.DisplayRectangle.Width - 2, this.toolStripTextBox1.Height);
         }
 

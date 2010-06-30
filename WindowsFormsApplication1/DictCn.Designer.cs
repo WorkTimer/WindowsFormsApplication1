@@ -1088,13 +1088,15 @@ namespace WindowsFormsApplication1
         /// <param name="扫描日期">扫描日期 属性的初始值。</param>
         /// <param name="扫描地址">扫描地址 属性的初始值。</param>
         /// <param name="扫描类型">扫描类型 属性的初始值。</param>
-        public static 扫描指针 Create扫描指针(global::System.Int32 id, global::System.DateTime 扫描日期, global::System.String 扫描地址, global::System.String 扫描类型)
+        /// <param name="当前ID">当前ID 属性的初始值。</param>
+        public static 扫描指针 Create扫描指针(global::System.Int32 id, global::System.DateTime 扫描日期, global::System.String 扫描地址, global::System.String 扫描类型, global::System.Int32 当前ID)
         {
             扫描指针 扫描指针 = new 扫描指针();
             扫描指针.ID = id;
             扫描指针.扫描日期 = 扫描日期;
             扫描指针.扫描地址 = 扫描地址;
             扫描指针.扫描类型 = 扫描类型;
+            扫描指针.当前ID = 当前ID;
             return 扫描指针;
         }
 
@@ -1199,6 +1201,30 @@ namespace WindowsFormsApplication1
         private global::System.String _扫描类型;
         partial void On扫描类型Changing(global::System.String value);
         partial void On扫描类型Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 当前ID
+        {
+            get
+            {
+                return _当前ID;
+            }
+            set
+            {
+                On当前IDChanging(value);
+                ReportPropertyChanging("当前ID");
+                _当前ID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("当前ID");
+                On当前IDChanged();
+            }
+        }
+        private global::System.Int32 _当前ID;
+        partial void On当前IDChanging(global::System.Int32 value);
+        partial void On当前IDChanged();
 
         #endregion
     
