@@ -82,6 +82,7 @@
     <Property Name="扫描日期" Type="datetime" Nullable="false" />
     <Property Name="扫描地址" Type="nvarchar(max)" Nullable="false" />
     <Property Name="扫描类型" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="当前ID" Type="int" Nullable="false" />
     <Property Name="单词_ID" Type="int" Nullable="true" />
     <Property Name="分类_ID" Type="int" Nullable="true" />
     <Property Name="课本_ID" Type="int" Nullable="true" />

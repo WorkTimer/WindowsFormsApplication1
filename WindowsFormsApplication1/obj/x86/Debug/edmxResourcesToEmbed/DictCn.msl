@@ -39,6 +39,7 @@
           <ScalarProperty Name="扫描日期" ColumnName="扫描日期" />
           <ScalarProperty Name="扫描地址" ColumnName="扫描地址" />
           <ScalarProperty Name="扫描类型" ColumnName="扫描类型" />
+          <ScalarProperty Name="当前ID" ColumnName="当前ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

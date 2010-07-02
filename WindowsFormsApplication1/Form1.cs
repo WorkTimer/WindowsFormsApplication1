@@ -49,14 +49,14 @@ namespace WindowsFormsApplication1
                 
                 扫描指针 my扫描指针 = m_context.扫描指针集.SingleOrDefault();
                 if (my扫描指针 == null)
-                    m_context.扫描指针集.AddObject(new 扫描指针 { ID = 1, 扫描日期 = DateTime.Now, 扫描地址 = m_StartAddress, 扫描类型 = "", 当前ID = 0 });
+                    m_context.扫描指针集.AddObject(new 扫描指针 { ID = 1, 扫描日期 = DateTime.Now, 扫描地址 = "", 扫描类型 = "分类", 当前ID = 1 });
                 else
                 {
                     my扫描指针.ID = 1;
                     my扫描指针.扫描日期 = DateTime.Now;
-                    my扫描指针.扫描地址 = m_StartAddress;
-                    my扫描指针.扫描类型 = "";
-                    my扫描指针.当前ID = 0;
+                    my扫描指针.扫描地址 = "";
+                    my扫描指针.扫描类型 = "分类";
+                    my扫描指针.当前ID = 1;
                 }
                 i = m_context.SaveChanges();
                 this.dataGridView1.DataSource = m_context.分类集;
@@ -85,16 +85,58 @@ namespace WindowsFormsApplication1
 
         private void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
+            //this.toolStripTextBox1.Text = e.Url.AbsoluteUri;
+        }
+        private void webBrowser1_分类DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            if (e.Url != this.webBrowser1.Url) return;
             this.toolStripTextBox1.Text = e.Url.AbsoluteUri;
+            WebBrowser web = (WebBrowser)sender;
+        }
+
+        private void webBrowser1_课本DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+
+        }
+
+        private void webBrowser1_分组DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+
+        }
+
+        private void webBrowser1_分页DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+
+        }
+
+        private void webBrowser1_单词DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+
         }
 
         private void dataGridView1_DataSourceChanged(object sender, EventArgs e)
         {
-            //this.dataGridView1.DataSourceChanged += new System.EventHandler(this.dataGridView1_DataSourceChanged);
             this.webBrowser1.DocumentCompleted -= new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
-            //if (m_context == null) m_context = new DictCnEntities();
             扫描指针 my扫描指针 = m_context.扫描指针集.Single();
-            
+
+            switch (my扫描指针.扫描类型)
+            {
+                
+                case "分类":
+                    this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_分类DocumentCompleted);
+                    this.webBrowser1.Navigate(m_StartAddress + (from o in m_context.分类集 where o.ID == my扫描指针.当前ID select o).FirstOrDefault().地址);
+                    break;
+                case "课本":
+                    break;
+                case "分组":
+                    break;
+                case "分页":
+                    break;
+                case "单词":
+                    break;
+                default :
+                     break;
+            }
         }
     }
 }
