@@ -51,6 +51,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="名称" Type="nvarchar(max)" Nullable="false" />
     <Property Name="地址" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="已扫描" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="单词集">
     <Key>
@@ -61,6 +62,7 @@
     <Property Name="音标" Type="nvarchar(max)" Nullable="false" />
     <Property Name="解释" Type="nvarchar(max)" Nullable="false" />
     <Property Name="读音" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="已扫描" Type="bit" Nullable="false" />
     <Property Name="分页_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="课本集">
@@ -72,6 +74,9 @@
     <Property Name="地址" Type="nvarchar(max)" Nullable="false" />
     <Property Name="单词数量" Type="int" Nullable="false" />
     <Property Name="分组方式" Type="tinyint" Nullable="false" />
+    <Property Name="已扫描" Type="bit" Nullable="false" />
+    <Property Name="系列" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="序号" Type="int" Nullable="false" />
     <Property Name="分类_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="扫描指针集">
@@ -98,6 +103,7 @@
     <Property Name="地址" Type="nvarchar(max)" Nullable="false" />
     <Property Name="单词数量" Type="int" Nullable="false" />
     <Property Name="页数" Type="int" Nullable="false" />
+    <Property Name="已扫描" Type="bit" Nullable="false" />
     <Property Name="课本_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="分页集">
@@ -108,6 +114,7 @@
     <Property Name="名称" Type="nvarchar(max)" Nullable="false" />
     <Property Name="地址" Type="nvarchar(max)" Nullable="false" />
     <Property Name="单词数量" Type="int" Nullable="false" />
+    <Property Name="已扫描" Type="bit" Nullable="false" />
     <Property Name="分组_ID" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="分类课本">

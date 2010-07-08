@@ -7,6 +7,7 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="名称" ColumnName="名称" />
           <ScalarProperty Name="地址" ColumnName="地址" />
+          <ScalarProperty Name="已扫描" ColumnName="已扫描" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -18,6 +19,7 @@
           <ScalarProperty Name="音标" ColumnName="音标" />
           <ScalarProperty Name="解释" ColumnName="解释" />
           <ScalarProperty Name="读音" ColumnName="读音" />
+          <ScalarProperty Name="已扫描" ColumnName="已扫描" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -29,6 +31,9 @@
           <ScalarProperty Name="地址" ColumnName="地址" />
           <ScalarProperty Name="单词数量" ColumnName="单词数量" />
           <ScalarProperty Name="分组方式" ColumnName="分组方式" />
+          <ScalarProperty Name="已扫描" ColumnName="已扫描" />
+          <ScalarProperty Name="系列" ColumnName="系列" />
+          <ScalarProperty Name="序号" ColumnName="序号" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -51,6 +56,7 @@
           <ScalarProperty Name="地址" ColumnName="地址" />
           <ScalarProperty Name="单词数量" ColumnName="单词数量" />
           <ScalarProperty Name="页数" ColumnName="页数" />
+          <ScalarProperty Name="已扫描" ColumnName="已扫描" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -61,6 +67,7 @@
           <ScalarProperty Name="名称" ColumnName="名称" />
           <ScalarProperty Name="地址" ColumnName="地址" />
           <ScalarProperty Name="单词数量" ColumnName="单词数量" />
+          <ScalarProperty Name="已扫描" ColumnName="已扫描" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

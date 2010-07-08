@@ -249,12 +249,14 @@ namespace WindowsFormsApplication1
         /// <param name="id">ID 属性的初始值。</param>
         /// <param name="名称">名称 属性的初始值。</param>
         /// <param name="地址">地址 属性的初始值。</param>
-        public static 分类 Create分类(global::System.Int32 id, global::System.String 名称, global::System.String 地址)
+        /// <param name="已扫描">已扫描 属性的初始值。</param>
+        public static 分类 Create分类(global::System.Int32 id, global::System.String 名称, global::System.String 地址, global::System.Boolean 已扫描)
         {
             分类 分类 = new 分类();
             分类.ID = id;
             分类.名称 = 名称;
             分类.地址 = 地址;
+            分类.已扫描 = 已扫描;
             return 分类;
         }
 
@@ -335,6 +337,30 @@ namespace WindowsFormsApplication1
         private global::System.String _地址;
         partial void On地址Changing(global::System.String value);
         partial void On地址Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean 已扫描
+        {
+            get
+            {
+                return _已扫描;
+            }
+            set
+            {
+                On已扫描Changing(value);
+                ReportPropertyChanging("已扫描");
+                _已扫描 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("已扫描");
+                On已扫描Changed();
+            }
+        }
+        private global::System.Boolean _已扫描;
+        partial void On已扫描Changing(global::System.Boolean value);
+        partial void On已扫描Changed();
 
         #endregion
     
@@ -405,7 +431,8 @@ namespace WindowsFormsApplication1
         /// <param name="地址">地址 属性的初始值。</param>
         /// <param name="单词数量">单词数量 属性的初始值。</param>
         /// <param name="页数">页数 属性的初始值。</param>
-        public static 分组 Create分组(global::System.Int32 id, global::System.String 名称, global::System.String 地址, global::System.Int32 单词数量, global::System.Int32 页数)
+        /// <param name="已扫描">已扫描 属性的初始值。</param>
+        public static 分组 Create分组(global::System.Int32 id, global::System.String 名称, global::System.String 地址, global::System.Int32 单词数量, global::System.Int32 页数, global::System.Boolean 已扫描)
         {
             分组 分组 = new 分组();
             分组.ID = id;
@@ -413,6 +440,7 @@ namespace WindowsFormsApplication1
             分组.地址 = 地址;
             分组.单词数量 = 单词数量;
             分组.页数 = 页数;
+            分组.已扫描 = 已扫描;
             return 分组;
         }
 
@@ -541,6 +569,30 @@ namespace WindowsFormsApplication1
         private global::System.Int32 _页数;
         partial void On页数Changing(global::System.Int32 value);
         partial void On页数Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean 已扫描
+        {
+            get
+            {
+                return _已扫描;
+            }
+            set
+            {
+                On已扫描Changing(value);
+                ReportPropertyChanging("已扫描");
+                _已扫描 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("已扫描");
+                On已扫描Changed();
+            }
+        }
+        private global::System.Boolean _已扫描;
+        partial void On已扫描Changing(global::System.Boolean value);
+        partial void On已扫描Changed();
 
         #endregion
     
@@ -648,13 +700,15 @@ namespace WindowsFormsApplication1
         /// <param name="名称">名称 属性的初始值。</param>
         /// <param name="地址">地址 属性的初始值。</param>
         /// <param name="单词数量">单词数量 属性的初始值。</param>
-        public static 分页 Create分页(global::System.Int32 id, global::System.String 名称, global::System.String 地址, global::System.Int32 单词数量)
+        /// <param name="已扫描">已扫描 属性的初始值。</param>
+        public static 分页 Create分页(global::System.Int32 id, global::System.String 名称, global::System.String 地址, global::System.Int32 单词数量, global::System.Boolean 已扫描)
         {
             分页 分页 = new 分页();
             分页.ID = id;
             分页.名称 = 名称;
             分页.地址 = 地址;
             分页.单词数量 = 单词数量;
+            分页.已扫描 = 已扫描;
             return 分页;
         }
 
@@ -759,6 +813,30 @@ namespace WindowsFormsApplication1
         private global::System.Int32 _单词数量;
         partial void On单词数量Changing(global::System.Int32 value);
         partial void On单词数量Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean 已扫描
+        {
+            get
+            {
+                return _已扫描;
+            }
+            set
+            {
+                On已扫描Changing(value);
+                ReportPropertyChanging("已扫描");
+                _已扫描 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("已扫描");
+                On已扫描Changed();
+            }
+        }
+        private global::System.Boolean _已扫描;
+        partial void On已扫描Changing(global::System.Boolean value);
+        partial void On已扫描Changed();
 
         #endregion
     
@@ -867,7 +945,8 @@ namespace WindowsFormsApplication1
         /// <param name="音标">音标 属性的初始值。</param>
         /// <param name="解释">解释 属性的初始值。</param>
         /// <param name="读音">读音 属性的初始值。</param>
-        public static 单词 Create单词(global::System.Int32 id, global::System.String 拼写, global::System.String 音标, global::System.String 解释, global::System.String 读音)
+        /// <param name="已扫描">已扫描 属性的初始值。</param>
+        public static 单词 Create单词(global::System.Int32 id, global::System.String 拼写, global::System.String 音标, global::System.String 解释, global::System.String 读音, global::System.Boolean 已扫描)
         {
             单词 单词 = new 单词();
             单词.ID = id;
@@ -875,6 +954,7 @@ namespace WindowsFormsApplication1
             单词.音标 = 音标;
             单词.解释 = 解释;
             单词.读音 = 读音;
+            单词.已扫描 = 已扫描;
             return 单词;
         }
 
@@ -1003,6 +1083,30 @@ namespace WindowsFormsApplication1
         private global::System.String _读音;
         partial void On读音Changing(global::System.String value);
         partial void On读音Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean 已扫描
+        {
+            get
+            {
+                return _已扫描;
+            }
+            set
+            {
+                On已扫描Changing(value);
+                ReportPropertyChanging("已扫描");
+                _已扫描 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("已扫描");
+                On已扫描Changed();
+            }
+        }
+        private global::System.Boolean _已扫描;
+        partial void On已扫描Changing(global::System.Boolean value);
+        partial void On已扫描Changed();
 
         #endregion
     
@@ -1441,7 +1545,10 @@ namespace WindowsFormsApplication1
         /// <param name="地址">地址 属性的初始值。</param>
         /// <param name="单词数量">单词数量 属性的初始值。</param>
         /// <param name="分组方式">分组方式 属性的初始值。</param>
-        public static 课本 Create课本(global::System.Int32 id, global::System.String 名称, global::System.String 地址, global::System.Int32 单词数量, global::System.Byte 分组方式)
+        /// <param name="已扫描">已扫描 属性的初始值。</param>
+        /// <param name="系列">系列 属性的初始值。</param>
+        /// <param name="序号">序号 属性的初始值。</param>
+        public static 课本 Create课本(global::System.Int32 id, global::System.String 名称, global::System.String 地址, global::System.Int32 单词数量, global::System.Byte 分组方式, global::System.Boolean 已扫描, global::System.String 系列, global::System.Int32 序号)
         {
             课本 课本 = new 课本();
             课本.ID = id;
@@ -1449,6 +1556,9 @@ namespace WindowsFormsApplication1
             课本.地址 = 地址;
             课本.单词数量 = 单词数量;
             课本.分组方式 = 分组方式;
+            课本.已扫描 = 已扫描;
+            课本.系列 = 系列;
+            课本.序号 = 序号;
             return 课本;
         }
 
@@ -1577,6 +1687,78 @@ namespace WindowsFormsApplication1
         private global::System.Byte _分组方式;
         partial void On分组方式Changing(global::System.Byte value);
         partial void On分组方式Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean 已扫描
+        {
+            get
+            {
+                return _已扫描;
+            }
+            set
+            {
+                On已扫描Changing(value);
+                ReportPropertyChanging("已扫描");
+                _已扫描 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("已扫描");
+                On已扫描Changed();
+            }
+        }
+        private global::System.Boolean _已扫描;
+        partial void On已扫描Changing(global::System.Boolean value);
+        partial void On已扫描Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String 系列
+        {
+            get
+            {
+                return _系列;
+            }
+            set
+            {
+                On系列Changing(value);
+                ReportPropertyChanging("系列");
+                _系列 = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("系列");
+                On系列Changed();
+            }
+        }
+        private global::System.String _系列;
+        partial void On系列Changing(global::System.String value);
+        partial void On系列Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 序号
+        {
+            get
+            {
+                return _序号;
+            }
+            set
+            {
+                On序号Changing(value);
+                ReportPropertyChanging("序号");
+                _序号 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("序号");
+                On序号Changed();
+            }
+        }
+        private global::System.Int32 _序号;
+        partial void On序号Changing(global::System.Int32 value);
+        partial void On序号Changed();
 
         #endregion
     

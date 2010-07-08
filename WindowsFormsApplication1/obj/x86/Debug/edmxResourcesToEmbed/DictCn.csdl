@@ -53,6 +53,7 @@
     <Property Type="String" Name="地址" Nullable="false" />
     <NavigationProperty Name="课本" Relationship="DictCnModel.分类课本" FromRole="分类" ToRole="课本" />
     <NavigationProperty Name="扫描指针" Relationship="DictCnModel.分类扫描指针" FromRole="分类" ToRole="扫描指针" />
+    <Property Type="Boolean" Name="已扫描" Nullable="false" />
   </EntityType>
   <EntityType Name="单词">
     <Key>
@@ -65,6 +66,7 @@
     <Property Type="String" Name="读音" Nullable="false" />
     <NavigationProperty Name="分页" Relationship="DictCnModel.分页单词" FromRole="单词" ToRole="分页" />
     <NavigationProperty Name="扫描指针" Relationship="DictCnModel.单词扫描指针" FromRole="单词" ToRole="扫描指针" />
+    <Property Type="Boolean" Name="已扫描" Nullable="false" />
   </EntityType>
   <EntityType Name="课本">
     <Key>
@@ -78,6 +80,9 @@
     <Property Type="Byte" Name="分组方式" Nullable="false" />
     <NavigationProperty Name="分组" Relationship="DictCnModel.课本分组" FromRole="课本" ToRole="分组" />
     <NavigationProperty Name="扫描指针" Relationship="DictCnModel.课本扫描指针" FromRole="课本" ToRole="扫描指针" />
+    <Property Type="Boolean" Name="已扫描" Nullable="false" />
+    <Property Type="String" Name="系列" Nullable="false" />
+    <Property Type="Int32" Name="序号" Nullable="false" />
   </EntityType>
   <Association Name="分类课本">
     <End Type="DictCnModel.分类" Multiplicity="1" Role="分类" />
@@ -110,6 +115,7 @@
     <Property Type="Int32" Name="单词数量" Nullable="false" />
     <Property Type="Int32" Name="页数" Nullable="false" />
     <NavigationProperty Name="扫描指针" Relationship="DictCnModel.分组扫描指针" FromRole="分组" ToRole="扫描指针" />
+    <Property Type="Boolean" Name="已扫描" Nullable="false" />
   </EntityType>
   <EntityType Name="分页">
     <Key>
@@ -122,6 +128,7 @@
     <Property Type="String" Name="地址" Nullable="false" />
     <Property Type="Int32" Name="单词数量" Nullable="false" />
     <NavigationProperty Name="扫描指针" Relationship="DictCnModel.分页扫描指针" FromRole="分页" ToRole="扫描指针" />
+    <Property Type="Boolean" Name="已扫描" Nullable="false" />
   </EntityType>
   <Association Name="课本分组">
     <End Type="DictCnModel.课本" Role="课本" Multiplicity="1" />

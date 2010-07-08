@@ -56,6 +56,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="名称" Type="nvarchar(max)" Nullable="false" />
     <Property Name="地址" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="已扫描" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="单词集">
     <Key>
@@ -66,6 +67,7 @@
     <Property Name="音标" Type="nvarchar(max)" Nullable="false" />
     <Property Name="解释" Type="nvarchar(max)" Nullable="false" />
     <Property Name="读音" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="已扫描" Type="bit" Nullable="false" />
     <Property Name="分页_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="课本集">
@@ -77,6 +79,9 @@
     <Property Name="地址" Type="nvarchar(max)" Nullable="false" />
     <Property Name="单词数量" Type="int" Nullable="false" />
     <Property Name="分组方式" Type="tinyint" Nullable="false" />
+    <Property Name="已扫描" Type="bit" Nullable="false" />
+    <Property Name="系列" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="序号" Type="int" Nullable="false" />
     <Property Name="分类_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="扫描指针集">
@@ -103,6 +108,7 @@
     <Property Name="地址" Type="nvarchar(max)" Nullable="false" />
     <Property Name="单词数量" Type="int" Nullable="false" />
     <Property Name="页数" Type="int" Nullable="false" />
+    <Property Name="已扫描" Type="bit" Nullable="false" />
     <Property Name="课本_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="分页集">
@@ -113,6 +119,7 @@
     <Property Name="名称" Type="nvarchar(max)" Nullable="false" />
     <Property Name="地址" Type="nvarchar(max)" Nullable="false" />
     <Property Name="单词数量" Type="int" Nullable="false" />
+    <Property Name="已扫描" Type="bit" Nullable="false" />
     <Property Name="分组_ID" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="分类课本">
@@ -280,6 +287,7 @@
           <Property Type="String" Name="地址" Nullable="false" />
           <NavigationProperty Name="课本" Relationship="DictCnModel.分类课本" FromRole="分类" ToRole="课本" />
           <NavigationProperty Name="扫描指针" Relationship="DictCnModel.分类扫描指针" FromRole="分类" ToRole="扫描指针" />
+          <Property Type="Boolean" Name="已扫描" Nullable="false" />
         </EntityType>
         <EntityType Name="单词">
           <Key>
@@ -292,6 +300,7 @@
           <Property Type="String" Name="读音" Nullable="false" />
           <NavigationProperty Name="分页" Relationship="DictCnModel.分页单词" FromRole="单词" ToRole="分页" />
           <NavigationProperty Name="扫描指针" Relationship="DictCnModel.单词扫描指针" FromRole="单词" ToRole="扫描指针" />
+          <Property Type="Boolean" Name="已扫描" Nullable="false" />
         </EntityType>
         <EntityType Name="课本">
           <Key>
@@ -305,6 +314,9 @@
           <Property Type="Byte" Name="分组方式" Nullable="false" />
           <NavigationProperty Name="分组" Relationship="DictCnModel.课本分组" FromRole="课本" ToRole="分组" />
           <NavigationProperty Name="扫描指针" Relationship="DictCnModel.课本扫描指针" FromRole="课本" ToRole="扫描指针" />
+          <Property Type="Boolean" Name="已扫描" Nullable="false" />
+          <Property Type="String" Name="系列" Nullable="false" />
+          <Property Type="Int32" Name="序号" Nullable="false" />
         </EntityType>
         <Association Name="分类课本">
           <End Type="DictCnModel.分类" Multiplicity="1" Role="分类" />
@@ -337,6 +349,7 @@
           <Property Type="Int32" Name="单词数量" Nullable="false" />
           <Property Type="Int32" Name="页数" Nullable="false" />
           <NavigationProperty Name="扫描指针" Relationship="DictCnModel.分组扫描指针" FromRole="分组" ToRole="扫描指针" />
+          <Property Type="Boolean" Name="已扫描" Nullable="false" />
         </EntityType>
         <EntityType Name="分页">
           <Key>
@@ -349,6 +362,7 @@
           <Property Type="String" Name="地址" Nullable="false" />
           <Property Type="Int32" Name="单词数量" Nullable="false" />
           <NavigationProperty Name="扫描指针" Relationship="DictCnModel.分页扫描指针" FromRole="分页" ToRole="扫描指针" />
+          <Property Type="Boolean" Name="已扫描" Nullable="false" />
         </EntityType>
         <Association Name="课本分组">
           <End Type="DictCnModel.课本" Role="课本" Multiplicity="1" />
@@ -394,6 +408,7 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="名称" ColumnName="名称" />
           <ScalarProperty Name="地址" ColumnName="地址" />
+          <ScalarProperty Name="已扫描" ColumnName="已扫描" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -405,6 +420,7 @@
           <ScalarProperty Name="音标" ColumnName="音标" />
           <ScalarProperty Name="解释" ColumnName="解释" />
           <ScalarProperty Name="读音" ColumnName="读音" />
+          <ScalarProperty Name="已扫描" ColumnName="已扫描" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -416,6 +432,9 @@
           <ScalarProperty Name="地址" ColumnName="地址" />
           <ScalarProperty Name="单词数量" ColumnName="单词数量" />
           <ScalarProperty Name="分组方式" ColumnName="分组方式" />
+          <ScalarProperty Name="已扫描" ColumnName="已扫描" />
+          <ScalarProperty Name="系列" ColumnName="系列" />
+          <ScalarProperty Name="序号" ColumnName="序号" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -438,6 +457,7 @@
           <ScalarProperty Name="地址" ColumnName="地址" />
           <ScalarProperty Name="单词数量" ColumnName="单词数量" />
           <ScalarProperty Name="页数" ColumnName="页数" />
+          <ScalarProperty Name="已扫描" ColumnName="已扫描" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -448,6 +468,7 @@
           <ScalarProperty Name="名称" ColumnName="名称" />
           <ScalarProperty Name="地址" ColumnName="地址" />
           <ScalarProperty Name="单词数量" ColumnName="单词数量" />
+          <ScalarProperty Name="已扫描" ColumnName="已扫描" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -548,48 +569,51 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Model1" ZoomLevel="98" ShowGrid="true" DisplayType="true" >
-        <EntityTypeShape EntityType="DictCnModel.分类" Width="1.5" PointX="8.5" PointY="0.5" Height="1.779012858072917" />
-        <EntityTypeShape EntityType="DictCnModel.单词" Width="1.5" PointX="0.625" PointY="0.5" Height="2.16105224609375" />
-        <EntityTypeShape EntityType="DictCnModel.课本" Width="1.5" PointX="6.5" PointY="0.5" Height="2.352071940104167" />
+        <EntityTypeShape EntityType="DictCnModel.分类" Width="1.5" PointX="8.5" PointY="0.5" Height="2.16105224609375" />
+        <EntityTypeShape EntityType="DictCnModel.单词" Width="1.5" PointX="0.625" PointY="0.5" Height="2.5430916341145831" />
+        <EntityTypeShape EntityType="DictCnModel.课本" Width="1.5" PointX="6.5" PointY="0.5" Height="3.1161507161458326" />
         <AssociationConnector Association="DictCnModel.分类课本">
-          <ConnectorPoint PointX="8.5" PointY="1.3895064290364585" />
-          <ConnectorPoint PointX="8" PointY="1.3895064290364585" />
+          <ConnectorPoint PointX="8.5" PointY="1.5805261230468748" />
+          <ConnectorPoint PointX="8" PointY="1.5805261230468748" />
         </AssociationConnector>
         <EntityTypeShape EntityType="DictCnModel.扫描指针" Width="1.5" PointX="4.875" PointY="3.5" Height="2.9251310221354156" />
-        <EntityTypeShape EntityType="DictCnModel.分组" Width="1.5" PointX="4.625" PointY="0.5" Height="2.3520719401041661" />
-        <EntityTypeShape EntityType="DictCnModel.分页" Width="1.5" PointX="2.75" PointY="0.5" Height="2.16105224609375" />
+        <EntityTypeShape EntityType="DictCnModel.分组" Width="1.5" PointX="4.625" PointY="0.5" Height="2.734111328125" />
+        <EntityTypeShape EntityType="DictCnModel.分页" Width="1.5" PointX="2.75" PointY="0.5" Height="2.5430916341145831" />
         <AssociationConnector Association="DictCnModel.课本分组">
-          <ConnectorPoint PointX="6.5" PointY="1.6760359700520828" />
-          <ConnectorPoint PointX="6.125" PointY="1.6760359700520828" />
+          <ConnectorPoint PointX="6.5" PointY="1.8670556640625002" />
+          <ConnectorPoint PointX="6.125" PointY="1.8670556640625002" />
         </AssociationConnector>
         <AssociationConnector Association="DictCnModel.分组分页">
-          <ConnectorPoint PointX="4.625" PointY="1.5805261230468748" />
-          <ConnectorPoint PointX="4.25" PointY="1.5805261230468748" />
+          <ConnectorPoint PointX="4.625" PointY="1.6925383935546869" />
+          <ConnectorPoint PointX="4.25" PointY="1.6925383935546869" />
         </AssociationConnector>
         <AssociationConnector Association="DictCnModel.分页单词">
-          <ConnectorPoint PointX="2.75" PointY="1.5805261230468748" />
-          <ConnectorPoint PointX="2.125" PointY="1.5805261230468748" />
+          <ConnectorPoint PointX="2.75" PointY="1.7715458170572918" />
+          <ConnectorPoint PointX="2.125" PointY="1.7715458170572918" />
         </AssociationConnector>
         <AssociationConnector Association="DictCnModel.单词扫描指针">
-          <ConnectorPoint PointX="1.375" PointY="2.8520719401041661" />
-          <ConnectorPoint PointX="1.375" PointY="4.9625655110677078" />
-          <ConnectorPoint PointX="4.875" PointY="4.9625655110677078" />
+          <ConnectorPoint PointX="1.375" PointY="3.0430916341145831" />
+          <ConnectorPoint PointX="1.375" PointY="4.9938180110677086" />
+          <ConnectorPoint PointX="4.875" PointY="4.9938180110677086" />
         </AssociationConnector>
         <AssociationConnector Association="DictCnModel.分类扫描指针">
-          <ConnectorPoint PointX="9.25" PointY="2.4700325520833335" />
-          <ConnectorPoint PointX="9.25" PointY="4.9625655110677078" />
-          <ConnectorPoint PointX="6.375" PointY="4.9625655110677078" />
+          <ConnectorPoint PointX="9.25" PointY="2.66105224609375" />
+          <ConnectorPoint PointX="9.25" PointY="4.9938180110677086" />
+          <ConnectorPoint PointX="7.333333333333333" PointY="4.9938180110677077" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="4.9938180110677086" />
+          <ConnectorPoint PointX="6.375" PointY="4.9938180110677086" />
         </AssociationConnector>
         <AssociationConnector Association="DictCnModel.课本扫描指针">
-          <ConnectorPoint PointX="6.5" PointY="3.0430916341145831" />
-          <ConnectorPoint PointX="6.375" PointY="3.5" />
+          <ConnectorPoint PointX="7.25" PointY="3.6161507161458326" />
+          <ConnectorPoint PointX="7.25" PointY="5.7407265166015629" />
+          <ConnectorPoint PointX="6.375" PointY="5.7407265166015629" />
         </AssociationConnector>
         <AssociationConnector Association="DictCnModel.分组扫描指针">
-          <ConnectorPoint PointX="5.5312525" PointY="3.0430916341145831" />
-          <ConnectorPoint PointX="5.5312525" PointY="3.5" />
+          <ConnectorPoint PointX="5.5" PointY="3.234111328125" />
+          <ConnectorPoint PointX="5.5" PointY="3.5" />
         </AssociationConnector>
         <AssociationConnector Association="DictCnModel.分页扫描指针">
-          <ConnectorPoint PointX="4.25" PointY="2.852071940104167" />
+          <ConnectorPoint PointX="4.25" PointY="3.0430916341145831" />
           <ConnectorPoint PointX="4.875" PointY="3.5" />
         </AssociationConnector>
       </Diagram>

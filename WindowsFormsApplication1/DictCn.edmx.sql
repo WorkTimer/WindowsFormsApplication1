@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 06/30/2010 23:08:42
--- Generated from EDMX file: C:\Users\Timer\Documents\Visual Studio 2010\Projects\WindowsFormsApplication1\WindowsFormsApplication1\DictCn.edmx
+-- Date Created: 07/08/2010 13:51:13
+-- Generated from EDMX file: C:\Users\Administrator\Documents\Visual Studio 2010\Projects\WindowsFormsApplication1\WindowsFormsApplication1\DictCn.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [C:\Users\Timer\Documents\Visual Studio 2010\Projects\WindowsFormsApplication1\WindowsFormsApplication1\DictCn.mdf];
+USE [C:\Users\Administrator\Documents\Visual Studio 2010\Projects\WindowsFormsApplication1\WindowsFormsApplication1\DictCn.mdf];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -76,7 +76,8 @@ GO
 CREATE TABLE [dbo].[分类集] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [名称] nvarchar(max)  NOT NULL,
-    [地址] nvarchar(max)  NOT NULL
+    [地址] nvarchar(max)  NOT NULL,
+    [已扫描] bit  NOT NULL
 );
 GO
 
@@ -87,6 +88,7 @@ CREATE TABLE [dbo].[单词集] (
     [音标] nvarchar(max)  NOT NULL,
     [解释] nvarchar(max)  NOT NULL,
     [读音] nvarchar(max)  NOT NULL,
+    [已扫描] bit  NOT NULL,
     [分页_ID] int  NOT NULL
 );
 GO
@@ -98,6 +100,9 @@ CREATE TABLE [dbo].[课本集] (
     [地址] nvarchar(max)  NOT NULL,
     [单词数量] int  NOT NULL,
     [分组方式] tinyint  NOT NULL,
+    [已扫描] bit  NOT NULL,
+    [系列] nvarchar(max)  NOT NULL,
+    [序号] int  NOT NULL,
     [分类_ID] int  NOT NULL
 );
 GO
@@ -124,6 +129,7 @@ CREATE TABLE [dbo].[分组集] (
     [地址] nvarchar(max)  NOT NULL,
     [单词数量] int  NOT NULL,
     [页数] int  NOT NULL,
+    [已扫描] bit  NOT NULL,
     [课本_ID] int  NOT NULL
 );
 GO
@@ -134,6 +140,7 @@ CREATE TABLE [dbo].[分页集] (
     [名称] nvarchar(max)  NOT NULL,
     [地址] nvarchar(max)  NOT NULL,
     [单词数量] int  NOT NULL,
+    [已扫描] bit  NOT NULL,
     [分组_ID] int  NOT NULL
 );
 GO
