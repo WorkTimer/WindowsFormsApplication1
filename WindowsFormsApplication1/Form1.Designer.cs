@@ -160,7 +160,6 @@
             // 
             this.toolStripTextBox1.Name = "toolStripTextBox1";
             this.toolStripTextBox1.Size = new System.Drawing.Size(700, 25);
-            this.toolStripTextBox1.Text = "http://dict.cn/bdc/";
             // 
             // webBrowser1
             // 
