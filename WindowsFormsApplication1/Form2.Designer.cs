@@ -35,17 +35,20 @@
             // 
             // webBrowser1
             // 
-            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.webBrowser1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.webBrowser1.Location = new System.Drawing.Point(0, 0);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(743, 276);
+            this.webBrowser1.Size = new System.Drawing.Size(743, 279);
             this.webBrowser1.TabIndex = 0;
             this.webBrowser1.Url = new System.Uri("", System.UriKind.Relative);
             this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
             // 
             // button1
             // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.button1.Location = new System.Drawing.Point(33, 300);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
@@ -56,11 +59,12 @@
             // 
             // textBox1
             // 
+            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.textBox1.Location = new System.Drawing.Point(33, 330);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(634, 21);
             this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "http://www13.dict.cn/bdc/399-A-3";
+            this.textBox1.Text = "http://www13.dict.cn/bdc/141-1-0";
             // 
             // Form2
             // 

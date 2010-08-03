@@ -946,7 +946,8 @@ namespace WindowsFormsApplication1
         /// <param name="解释">解释 属性的初始值。</param>
         /// <param name="读音">读音 属性的初始值。</param>
         /// <param name="已扫描">已扫描 属性的初始值。</param>
-        public static 单词 Create单词(global::System.Int32 id, global::System.String 拼写, global::System.String 音标, global::System.String 解释, global::System.String 读音, global::System.Boolean 已扫描)
+        /// <param name="编号">编号 属性的初始值。</param>
+        public static 单词 Create单词(global::System.Int32 id, global::System.String 拼写, global::System.String 音标, global::System.String 解释, global::System.String 读音, global::System.Boolean 已扫描, global::System.Int32 编号)
         {
             单词 单词 = new 单词();
             单词.ID = id;
@@ -955,6 +956,7 @@ namespace WindowsFormsApplication1
             单词.解释 = 解释;
             单词.读音 = 读音;
             单词.已扫描 = 已扫描;
+            单词.编号 = 编号;
             return 单词;
         }
 
@@ -1107,6 +1109,30 @@ namespace WindowsFormsApplication1
         private global::System.Boolean _已扫描;
         partial void On已扫描Changing(global::System.Boolean value);
         partial void On已扫描Changed();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 编号
+        {
+            get
+            {
+                return _编号;
+            }
+            set
+            {
+                On编号Changing(value);
+                ReportPropertyChanging("编号");
+                _编号 = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("编号");
+                On编号Changed();
+            }
+        }
+        private global::System.Int32 _编号;
+        partial void On编号Changing(global::System.Int32 value);
+        partial void On编号Changed();
 
         #endregion
     

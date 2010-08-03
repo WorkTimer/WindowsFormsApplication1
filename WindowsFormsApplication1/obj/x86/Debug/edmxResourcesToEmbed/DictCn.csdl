@@ -67,6 +67,7 @@
     <NavigationProperty Name="分页" Relationship="DictCnModel.分页单词" FromRole="单词" ToRole="分页" />
     <NavigationProperty Name="扫描指针" Relationship="DictCnModel.单词扫描指针" FromRole="单词" ToRole="扫描指针" />
     <Property Type="Boolean" Name="已扫描" Nullable="false" />
+    <Property Type="Int32" Name="编号" Nullable="false" />
   </EntityType>
   <EntityType Name="课本">
     <Key>
