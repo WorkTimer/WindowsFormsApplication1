@@ -945,9 +945,8 @@ namespace WindowsFormsApplication1
         /// <param name="音标">音标 属性的初始值。</param>
         /// <param name="解释">解释 属性的初始值。</param>
         /// <param name="读音">读音 属性的初始值。</param>
-        /// <param name="已扫描">已扫描 属性的初始值。</param>
         /// <param name="编号">编号 属性的初始值。</param>
-        public static 单词 Create单词(global::System.Int32 id, global::System.String 拼写, global::System.String 音标, global::System.String 解释, global::System.String 读音, global::System.Boolean 已扫描, global::System.Int32 编号)
+        public static 单词 Create单词(global::System.Int32 id, global::System.String 拼写, global::System.String 音标, global::System.String 解释, global::System.String 读音, global::System.Int32 编号)
         {
             单词 单词 = new 单词();
             单词.ID = id;
@@ -955,7 +954,6 @@ namespace WindowsFormsApplication1
             单词.音标 = 音标;
             单词.解释 = 解释;
             单词.读音 = 读音;
-            单词.已扫描 = 已扫描;
             单词.编号 = 编号;
             return 单词;
         }
@@ -1089,9 +1087,9 @@ namespace WindowsFormsApplication1
         /// <summary>
         /// 没有元数据文档可用。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Boolean 已扫描
+        public Nullable<global::System.Boolean> 已扫描
         {
             get
             {
@@ -1106,8 +1104,8 @@ namespace WindowsFormsApplication1
                 On已扫描Changed();
             }
         }
-        private global::System.Boolean _已扫描;
-        partial void On已扫描Changing(global::System.Boolean value);
+        private Nullable<global::System.Boolean> _已扫描 = false;
+        partial void On已扫描Changing(Nullable<global::System.Boolean> value);
         partial void On已扫描Changed();
     
         /// <summary>

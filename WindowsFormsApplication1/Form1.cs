@@ -70,7 +70,7 @@ namespace WindowsFormsApplication1
                 {
                     string my名称 = htmlNode.InnerText.Trim();
                     string my地址 = m_StartAddress + htmlNode.Attributes["href"].Value.Trim();
-                    if (my名称 == "最近更新")
+                    if (my名称 != "最近更新")
                         continue;
                     分类 my分类 = (from o in m_context.分类集 where o.地址 == my地址 && o.名称 == my名称 select o).FirstOrDefault();
                     if (my分类 == null)
@@ -91,10 +91,10 @@ namespace WindowsFormsApplication1
                 
                 扫描指针 my扫描指针 = m_context.扫描指针集.SingleOrDefault();
                 if (my扫描指针 == null)
-                    m_context.扫描指针集.AddObject(new 扫描指针 { ID = 1, 扫描日期 = DateTime.Now, 扫描地址 = "", 扫描类型 = "分类"});
+                    m_context.扫描指针集.AddObject(new 扫描指针 {  扫描日期 = DateTime.Now, 扫描地址 = "", 扫描类型 = "分类"});
                 else
                 {
-                    my扫描指针.ID = 1;
+                    //my扫描指针.ID = 1;
                     my扫描指针.扫描日期 = DateTime.Now;
                     my扫描指针.扫描地址 = m_下一个地址;
                     my扫描指针.扫描类型 = "分类";

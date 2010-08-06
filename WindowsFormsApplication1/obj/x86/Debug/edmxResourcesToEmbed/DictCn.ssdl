@@ -85,7 +85,7 @@
     <Property Name="音标" Type="nvarchar(max)" Nullable="false" />
     <Property Name="解释" Type="nvarchar(max)" Nullable="false" />
     <Property Name="读音" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="已扫描" Type="bit" Nullable="false" />
+    <Property Name="已扫描" Type="bit" />
     <Property Name="分页_ID" Type="int" Nullable="false" />
     <Property Name="编号" Type="int" Nullable="false" />
   </EntityType>

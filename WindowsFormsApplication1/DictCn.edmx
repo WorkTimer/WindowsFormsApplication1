@@ -90,7 +90,7 @@
           <Property Name="音标" Type="nvarchar(max)" Nullable="false" />
           <Property Name="解释" Type="nvarchar(max)" Nullable="false" />
           <Property Name="读音" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="已扫描" Type="bit" Nullable="false" />
+          <Property Name="已扫描" Type="bit" />
           <Property Name="分页_ID" Type="int" Nullable="false" />
           <Property Name="编号" Type="int" Nullable="false" />
         </EntityType>
@@ -301,7 +301,7 @@
           <Property Type="String" Name="读音" Nullable="false" />
           <NavigationProperty Name="分页" Relationship="DictCnModel.分页单词" FromRole="单词" ToRole="分页" />
           <NavigationProperty Name="扫描指针" Relationship="DictCnModel.单词扫描指针" FromRole="单词" ToRole="扫描指针" />
-          <Property Type="Boolean" Name="已扫描" Nullable="false" />
+          <Property Type="Boolean" Name="已扫描" Nullable="true" DefaultValue="False" />
           <Property Type="Int32" Name="编号" Nullable="false" />
         </EntityType>
         <EntityType Name="课本">
